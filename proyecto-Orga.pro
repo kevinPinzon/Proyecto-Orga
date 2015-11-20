@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    dnuevo.cpp
+    dnuevo.cpp \
+    campo.cpp
 
 HEADERS  += mainwindow.h \
-    dnuevo.h
+    dnuevo.h \
+    campo.h
 
 FORMS    += mainwindow.ui \
     dnuevo.ui
