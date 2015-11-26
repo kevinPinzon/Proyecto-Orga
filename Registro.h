@@ -21,11 +21,13 @@ class Registro{
 	vector <string> datos;
 public:
 	Registro();
+	vector<string> getDatos();
 	string toString()const;
-	string inttoString(int) const;
+	string inttoString(int, bool) const;
 	string toStringArchivo(vector<Campo>)const;
 	void Escribir(ofstream&, vector<Campo>);
 	void Leer(ifstream&, vector<Campo>);
+	void agregarDato(string);
 
 	/* data */
 };

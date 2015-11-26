@@ -1,3 +1,7 @@
+/*
+main2.cpp 
+este main lee el header por campos y los agrega al vector que se llama estructura. luego imprime el vector estructura
+*/
 #include "Campo.h"
 #include <iostream>
 #include <fstream>

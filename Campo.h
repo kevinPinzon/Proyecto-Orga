@@ -3,6 +3,7 @@ Esta es la calse que representa un campo de la estructura
 esta clase campo solo es un tipo de concha donde se ponen los datos de verdad, es como un envase para los datos 
 Elmer Lopez
 */
+#pragma once
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -21,7 +22,7 @@ class Campo {
 		Campo();
 		Campo(const char*, int, int, int, int);
 		string toString()const;
-		string inttoString(int) const;
+		string inttoString(int, bool) const;
 		string toStringArchivo() const; 
 		friend istream& operator>>(istream&, Campo&);
 		friend ofstream& operator << (ofstream&, const Campo&);

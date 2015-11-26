@@ -31,15 +31,30 @@ string Campo::toString()const{
 	return ss.str();
 }
 
-string Campo::inttoString(int num) const{
+string Campo::inttoString(int num, bool edilson) const{
 	stringstream ss;
-	if(num < 10){
-		ss << "00" << num;
-	} else if (num <100)
-	{
-		ss<<"0"<<num;
-	} else {
-		ss<<num;
+	if (edilson){//edilson es true todo lo que no sea ID
+		if(num < 10){
+			ss << "00" << num;
+		} else if (num <100){
+			ss<<"0"<<num;
+		} else {
+			ss<<num;
+		}
+	} else {//edilson es false y para ID
+		if(num < 10){
+			ss << "00000" << num;
+		} else if (num <100){
+			ss<<"0000"<<num;
+		} else if (num < 1000){
+			ss<<"000"<<num;
+		} else if (num < 10000){
+			ss<<"00"<<num;
+		} else if (num < 100000){
+			ss<<"0"<<num;
+		} else {
+			ss<<num;
+		}
 	}
 	return ss.str();
 }
@@ -59,10 +74,10 @@ string Campo::toStringArchivo() const{
 	}
 	ss << ",";
 
-	ss << inttoString(fieldtype) << ",";
-	ss << inttoString(size) << ",";
-	ss << inttoString(sizedecimal) << ",";
-	ss << inttoString(keytype) << "\t";
+	ss << inttoString(fieldtype, true) << ",";
+	ss << inttoString(size, true) << ",";
+	ss << inttoString(sizedecimal, true) << ",";
+	ss << inttoString(keytype, true) << "\t";
 
 	return ss.str();
 }
