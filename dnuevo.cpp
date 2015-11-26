@@ -3,10 +3,13 @@
 #include "ui_dnuevo.h"
 #include "campo.h"
 #include <vector>
+<<<<<<< HEAD
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
+=======
+>>>>>>> pinzon
 
 using namespace std;
 

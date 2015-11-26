@@ -15,6 +15,7 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     dnuevo.cpp \
+<<<<<<< HEAD
     campo.cpp \
     dver.cpp
 
@@ -22,6 +23,13 @@ HEADERS  += mainwindow.h \
     dnuevo.h \
     campo.h \
     dver.h
+=======
+    campo.cpp
+
+HEADERS  += mainwindow.h \
+    dnuevo.h \
+    campo.h
+>>>>>>> pinzon
 
 FORMS    += mainwindow.ui \
     dnuevo.ui \

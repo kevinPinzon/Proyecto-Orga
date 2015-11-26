@@ -7,8 +7,11 @@
 #include <cstring>
 #include <fstream>
 #include <cstdlib>
+<<<<<<< HEAD
 #include <QString>
 #include <QFile>
+=======
+>>>>>>> pinzon
 
 using namespace std;
 
@@ -62,6 +65,7 @@ string Campo::toStringArchivo() const{
     return ss.str();
 }
 
+<<<<<<< HEAD
 
 istream& operator>>(istream& input, Campo& campo){
     input.ignore();
@@ -102,3 +106,10 @@ int Campo::getKeytype()const{
 }
 
 \
+=======
+ofstream& operator<<(ofstream& output, const Campo& campo){
+    //std::string registro = toStringArchivo();
+    output << campo.toStringArchivo();//registro.c_str();
+    return output;
+}
+>>>>>>> pinzon
