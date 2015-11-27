@@ -3,13 +3,10 @@
 #include "ui_dnuevo.h"
 #include "campo.h"
 #include <vector>
-<<<<<<< HEAD
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
-=======
->>>>>>> pinzon
 
 using namespace std;
 
@@ -60,10 +57,15 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
 
 void Dnuevo::on_btn_nuevoArchivo_clicked(){
     string nombreArchivo=ui->txt_nameArchivo->text().toStdString();
+    stringstream nameA;
+    nameA<<nombreArchivo<<".dat";
     ofstream archivo;
     Campo field;
     if(!estructura.empty()){
-        archivo.open(nombreArchivo.c_str(), ios::in | ios::out | ios::trunc);
+        archivo.open(nameA.str().c_str(), ios::in | ios::out | ios::trunc);
+        cantidadCampos=estructura.size();
+        archivo<<cantidadCampos;
+        archivo<<",";
         for (int i = 0; i < estructura.size(); ++i){
                 field = estructura.at(i);
                 cout << field.toString() << endl;

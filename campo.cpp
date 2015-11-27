@@ -7,18 +7,15 @@
 #include <cstring>
 #include <fstream>
 #include <cstdlib>
-<<<<<<< HEAD
 #include <QString>
 #include <QFile>
-=======
->>>>>>> pinzon
 
 using namespace std;
 
 Campo::Campo(){
 }
 
-Campo::Campo(const char* name, int fieldtype, int size, int sizedecimal, int keytype){
+Campo::Campo (const char* name, int fieldtype, int size, int sizedecimal, int keytype){
     strcpy(this->name, name);
     this-> fieldtype = fieldtype;
     this-> size = size;
@@ -32,21 +29,38 @@ string Campo::toString()const{
     return ss.str();
 }
 
-string Campo::inttoString(int num) const{
+string Campo::inttoString(int num, bool edilson) const{
     stringstream ss;
-    if(num < 10){
-        ss << "00" << num;
-    } else if (num <100){
-        ss<<"0"<<num;
-    } else {
-        ss<<num;
+    if (edilson){//edilson es true todo lo que no sea ID
+        if(num < 10){
+            ss << "00" << num;
+        } else if (num <100){
+            ss<<"0"<<num;
+        } else {
+            ss<<num;
+        }
+    } else {//edilson es false y para ID
+        if(num < 10){
+            ss << "00000" << num;
+        } else if (num <100){
+            ss<<"0000"<<num;
+        } else if (num < 1000){
+            ss<<"000"<<num;
+        } else if (num < 10000){
+            ss<<"00"<<num;
+        } else if (num < 100000){
+            ss<<"0"<<num;
+        } else {
+            ss<<num;
+        }
     }
-return ss.str();
+    return ss.str();
 }
 
 string Campo::toStringArchivo() const{
     bool bandera=true;
-    stringstream ss;//ss<<name<<";"<<fieldtype<<";"<<size<<";"<<sizedecimal<<";"<<keytype<<"\n";
+    stringstream ss;
+    //ss<<name<<";"<<fieldtype<<";"<<size<<";"<<sizedecimal<<";"<<keytype<<"\n";
     for (int i =0; i<30; i++){
         if (name[i] == '\0')
             bandera = false;
@@ -57,27 +71,21 @@ string Campo::toStringArchivo() const{
         }
     }
     ss << ",";
-    ss << inttoString(fieldtype) << ",";
-    ss << inttoString(size) << ",";
-    ss << inttoString(sizedecimal) << ",";
-    ss << inttoString(keytype) << "\t";
+
+    ss << inttoString(fieldtype, true) << ",";
+    ss << inttoString(size, true) << ",";
+    ss << inttoString(sizedecimal, true) << ",";
+    ss << inttoString(keytype, true) << "\t";
 
     return ss.str();
 }
 
-<<<<<<< HEAD
-
 istream& operator>>(istream& input, Campo& campo){
     input.ignore();
-    cout << "char: Nombre de campo" << endl;
     input.getline(campo.name, 30);
-    cout << "int: fieldtype donde 1- entero 2- textp 3- decimal" << endl;
     input >> campo.fieldtype;
-    cout << "int: size para longitud de cadena de texto" << endl;
     input >> campo.size;
-    cout << "int: size para digitos decimales" << endl;
     input >> campo.sizedecimal;
-    cout << "int: tipo de llave 0- nada 1- primaria 2- secundaria" << endl;
     input >> campo.keytype;
     return input;
 }
@@ -88,28 +96,78 @@ ofstream& operator<<(ofstream& output, const Campo& campo){
 
     return output;
 }
-char* Campo::getName()const{
 
-    return NULL;
+ifstream& operator >> (ifstream& input, Campo& campo){
+    string linea, sublinea;
+    char str[100];
+    if (!input.getline(str, 100, '\t'))
+        return input;
+    //cout << str << endl;
+    linea = str;
+
+    int pos1=0, pos2;
+    pos2 = linea.find('-');
+    sublinea = linea.substr(pos1, pos2-pos1);
+    campo.setName(sublinea.c_str());
+    //strcpy(campo.name, sublinea.c_str());
+
+    pos1 = linea.find(',');
+    pos2 = linea.find(',', pos1+1);
+    pos1++;
+    sublinea = linea.substr(pos1, pos2-pos1);
+    campo.setFieldtype(atoi(sublinea.c_str()));
+    //campo.fieldtype = atoi(sublinea.c_str());
+
+    pos1 = pos2+1;
+    pos2 = linea.find(',', pos1);
+    sublinea = linea.substr(pos1, pos2-pos1);
+    campo.setSize(atoi(sublinea.c_str()));
+    //campo.size = atoi(sublinea.c_str());
+
+    pos1 = pos2+1;
+    pos2 = linea.find(',', pos1);
+    sublinea = linea.substr(pos1, pos2-pos1);
+    campo.setSizedecimal(atoi(sublinea.c_str()));
+    //campo.sizedecimal = atoi(sublinea.c_str());
+
+    pos1 = pos2+1;
+    pos2 = linea.find(',', pos1);
+    sublinea = linea.substr(pos1, pos2-pos1);
+    campo.setKeytype(atoi(sublinea.c_str()));
+    //campo.keytype = atoi(sublinea.c_str());
+
+    return input;
 }
-int Campo::getFieldtype()const{
 
-    return 0;
+void Campo::setFieldtype(int valor){
+    this->fieldtype = valor;
+}
+
+int Campo::getFieldtype()const{
+    return this->fieldtype;
+}
+void Campo::setName(const char* name){
+    strcpy(this->name, name);
+}
+const char* Campo::getName()const{
+    //string str = name;
+    return this->name;
+}
+void Campo::setSize(int size){
+    this-> size = size;
 }
 int Campo::getSize()const{
-
-    return 0;
+    return this->size;
+}
+void Campo::setSizedecimal(int sizedecimal){
+    this->sizedecimal = sizedecimal;
+}
+int Campo::getSizedecimal()const{
+    return this->sizedecimal;
+}
+void Campo::setKeytype(int keytype){
+    this-> keytype = keytype;
 }
 int Campo::getKeytype()const{
-
-    return 0;
+    return this->keytype;
 }
-
-\
-=======
-ofstream& operator<<(ofstream& output, const Campo& campo){
-    //std::string registro = toStringArchivo();
-    output << campo.toStringArchivo();//registro.c_str();
-    return output;
-}
->>>>>>> pinzon

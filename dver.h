@@ -20,13 +20,15 @@ public:
     explicit Dver(QString path,QWidget *parent = 0);
     ~Dver();
     void leerHeader();
-
+    char str[80];
+    Campo field;
+    int cantDeCampos;
+    vector <Campo> estructura;
+    QFile archivo;
+    QString path;
+    void llenarTabla();
 private:
     Ui::Dver *ui;
-    void llenarTablaRegistro();
-    QString path;
-    QFile archivo;
-    vector<Campo*> campos;
 };
 
 #endif // DVER_H

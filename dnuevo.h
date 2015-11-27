@@ -19,7 +19,7 @@ public:
     ~Dnuevo();
      vector<Campo> estructura;
     bool llavePrimariaDisponible=false;
-
+    int cantidadCampos;
 private slots:
     void on_btn_agregarCampo_clicked();
 
