@@ -11,6 +11,7 @@ Dver::Dver(QString path,QWidget *parent):QDialog(parent),ui(new Ui::Dver){
     this->path = path;
     ui->setupUi(this);
     llenarTabla();
+
 }
 
 Dver::~Dver()
@@ -23,33 +24,43 @@ void Dver::llenarTabla(){
     if(file.is_open()){
         file.getline(str, 20, ',');
         cantDeCampos = atoi(str);
+
         for (int i = 0; i < cantDeCampos; i++){
             string linea=str;
+            cout<<"STR: "<<str<<endl;
             int pos = linea.find(',');
             file.seekg(pos);
             file >> field;
-
+            cout<<field.toString()<<endl;
             cout<<field.getName()<<"  -ahi esta el name"<<endl;
             estructura.push_back(field);
 
         }
     }
-    QTableWidget* tabla=ui->tw_registros;
+    QTableWidget* tabla=tabla=ui->tw_registros;
     do{
         tabla->removeRow(0);
     }while(tabla->rowCount());
     QStringList encabezados;
     Campo temp;
+    string tempCadena;
+    int posTemp;
     cout<<"size estructura: "<<estructura.size()<<endl;
     for (int cont = 0; cont < estructura.size(); ++cont) {
         temp=estructura.at(cont);
-        QString str(temp.getName());
+        tempCadena=temp.getName();
+        //tempCadena="nombre------";
+        posTemp=tempCadena.find('-');
+        tempCadena=tempCadena.substr(0,posTemp);
+        QString str(tempCadena.c_str());
         encabezados.append(str);
         cout<<temp.getName()<<"  ahi esta el nombre"<<endl;
     }
 
+
     tabla->setColumnCount(estructura.size());
     tabla->setHorizontalHeaderLabels(encabezados);
+    tabla->setRowCount(1);
 
 
 }
@@ -74,4 +85,21 @@ void Dver::leerHeader(){
 
         }
     }
+}
+
+//cerrar archivo
+
+void Dver::on_btn_agregarRegistro_clicked(){
+
+
+}
+
+void Dver::on_tw_registros_itemClicked(QTableWidgetItem *item){
+    int row = item->row();
+    //string dato=
+    //cout<<dato<<endl;
+    QTableWidget* tabla=ui->tw_registros;
+
+    //registro.agregarDato();
+
 }
