@@ -57,51 +57,52 @@ string Registro::inttoString(int num, bool edilson) const{
 
 string Registro::toStringArchivo(vector<Campo> estructura)const{
     stringstream ss;
-    //string valor; aqui pongo el string en datos.at(i)
-    for (int i=0; i<datos.size(); i++){
-        if (estructura.at(i).getFieldtype() == 0)//entero
-            ss<<inttoString(atoi(datos.at(i).c_str()), false);
-        if (estructura.at(i).getFieldtype() == 1){//texto
-            bool bandera = true;
-            int sizeTemp=estructura.at(i).getSize();
-        for (int j = 0; j < sizeTemp; ++j){
-            if (datos.at(i)[j] == '\0')
-                bandera = false;
-            if (bandera){
-                ss << datos.at(i)[j];
-            } else
-                ss<<'-';
-
-            }
-        }
-        if (estructura.at(i).getFieldtype()== 2){//decimal
-            string numerodecimal, parteEntero, parteDecimal;
-            int sizeDecimal = estructura.at(i).getSizedecimal();
-            numerodecimal = datos.at(i);
-            int pos1=0;
-            pos1 = numerodecimal.find('.');
-            parteEntero = numerodecimal.substr(0, pos1);
-            pos1++;
-            parteDecimal = numerodecimal.substr(pos1, numerodecimal.size()-pos1);
-            ss<< inttoString(atoi(parteEntero.c_str()), false);
-            ss<<".";
-            for (int j=0; j < sizeDecimal; j++){
+        //string valor; aqui pongo el string en datos.at(i)
+        for (int i=0; i<datos.size(); i++){
+            if (estructura.at(i).getFieldtype() == 0)//entero
+                ss<<inttoString(atoi(datos.at(i).c_str()), false);
+            if (estructura.at(i).getFieldtype() == 1){//texto
                 bool bandera = true;
-                if (j >= parteDecimal.size())
-                    bandera = false;
-                if (bandera){
-                    ss << parteDecimal[j];
-                } else {
-                    ss << "0";
+                int sizeTemp=estructura.at(i).getSize();
+                for (int j = 0; j < sizeTemp; ++j){
+                    if (datos.at(i)[j] == '\0')
+                        bandera = false;
+                    if (bandera){
+                        ss << datos.at(i)[j];
+                    } else {
+                        ss<<'-';
+                    }
                 }
             }
+            if (estructura.at(i).getFieldtype()== 2){//decimal
+                string numerodecimal, parteEntero, parteDecimal;
+                int tamaodecimal = estructura.at(i).getSizedecimal();
+                numerodecimal = datos.at(i);
+                int pos1=0;
+                pos1 = numerodecimal.find('.');
+                parteEntero = numerodecimal.substr(0, pos1);
+                pos1++;
+                parteDecimal = numerodecimal.substr(pos1, numerodecimal.size()-pos1);
+                ss<< inttoString(atoi(parteEntero.c_str()), false);
+                ss<<".";
+                for (int j=0; j < tamaodecimal; j++){
+                    bool bandera = true;
+                    if (j >= parteDecimal.size())
+                        bandera = false;
+                    if (bandera){
+                        ss << parteDecimal[j];
+                    } else {
+                        ss << "0";
+                    }
+                }
+            }
+            if (i < datos.size()-1){
+                ss << ",";
+            } else {
+                ss << "\t";
+            }
         }
-        if (i < datos.size()-1){
-            ss << ",";
-        } else
-            ss << "\t";
-    }
-    return ss.str();
+        return ss.str();
 }
 
     void Registro::Escribir(ofstream& archivo, vector<Campo> estructura){
@@ -117,5 +118,4 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
 
     void Registro::agregarDato(string datoN){
         datos.push_back(datoN);
-        cout << "size de datos "<<datos.size()<< endl;
     }

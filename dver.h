@@ -30,12 +30,17 @@ public:
     QString path;
     void llenarTabla();
     Registro registro;
+    ifstream fileLEER;
+    ofstream fileESCRIBIR;
+    int row;
 private slots:
     void on_pushButton_clicked();
     
     void on_btn_agregarRegistro_clicked();
 
     void on_tw_registros_itemClicked(QTableWidgetItem *item);
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::Dver *ui;

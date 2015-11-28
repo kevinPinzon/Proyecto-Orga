@@ -100,10 +100,8 @@ ofstream& operator<<(ofstream& output, const Campo& campo){
 ifstream& operator >> (ifstream& input, Campo& campo){
     string linea, sublinea;
     char str[100];
-    cout<<"TELL: "<<input.tellg()<<endl;
     if (!input.getline(str, 100, '\t'))
         return input;
-    cout <<"STR EN >>:  "<< str << endl;
     linea = str;
 
     int pos1=0, pos2;

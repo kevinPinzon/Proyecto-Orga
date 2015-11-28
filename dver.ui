@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>499</width>
-    <height>412</height>
+    <width>509</width>
+    <height>493</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,6 +34,32 @@
    </property>
    <property name="text">
     <string>Agregar Registro</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>410</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ver ma Registros</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>460</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CERRAR</string>
    </property>
   </widget>
  </widget>

@@ -117,8 +117,3 @@ void Dnuevo::on_rb_ID_clicked(){
     ui->sp_decimales->setEnabled(false);
     ui->sp_longitud->setEnabled(false);
 }
-
-void Dnuevo::on_rb_primaria_clicked(){
-
-
-}
