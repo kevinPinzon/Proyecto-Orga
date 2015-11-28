@@ -24,18 +24,21 @@ void Dver::llenarTabla(){
     if(file.is_open()){
         file.getline(str, 20, ',');
         cantDeCampos = atoi(str);
-
+        cout<<"STR:: "<<str<<endl;
+        cout<<"tellg: "<<file.tellg()<<endl;
         for (int i = 0; i < cantDeCampos; i++){
-            string linea=str;
-            cout<<"STR: "<<str<<endl;
-            int pos = linea.find(',');
-            file.seekg(pos);
+            //string linea=str;
+            //cout<<"STR: "<<str<<endl;
+            //int pos = linea.find(',');
+            //file.seekg(pos+1);
             file >> field;
-            cout<<field.toString()<<endl;
-            cout<<field.getName()<<"  -ahi esta el name"<<endl;
+            //cout<<field.toString()<<endl;
+            //cout<<field.getName()<<"  -ahi esta el name"<<endl;
             estructura.push_back(field);
 
         }
+    } else {
+        cerr << "No se abrio el archivo para leer en tabla"<<endl;
     }
     QTableWidget* tabla=tabla=ui->tw_registros;
     do{

@@ -18,7 +18,7 @@ public:
     explicit Dnuevo(QWidget *parent = 0);
     ~Dnuevo();
      vector<Campo> estructura;
-    bool llavePrimariaDisponible=false;
+    bool llavePrimariaDisponible=true;
     int cantidadCampos;
 private slots:
     void on_btn_agregarCampo_clicked();
@@ -30,6 +30,8 @@ private slots:
     void on_rb_char_clicked();
 
     void on_rb_decimal_clicked();
+
+    void on_rb_ID_clicked();
 
 private:
     Ui::Dnuevo *ui;

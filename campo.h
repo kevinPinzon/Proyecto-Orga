@@ -26,6 +26,7 @@ public:
     string toStringArchivo() const;
     friend istream& operator>>(istream&, Campo&);
     friend ofstream& operator << (ofstream&, const Campo&);
+    friend ifstream& operator >> (ifstream&, Campo&);
     void setFieldtype(int);
     int getFieldtype()const;
     void setName(const char*);

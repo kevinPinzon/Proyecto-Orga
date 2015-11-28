@@ -25,30 +25,49 @@ Dnuevo::~Dnuevo()
 void Dnuevo::on_btn_agregarCampo_clicked(){
     string nombreCampo=ui->txt_nameCampo->text().toStdString();
     int tipoCampo=-1;//1-entero,2-char,3-decimal
-    if(ui->rb_int->isChecked())
+    if(ui->rb_int->isChecked())//ENTERO
         tipoCampo=1;
-    if(ui->rb_char->isChecked())
+    if(ui->rb_char->isChecked())//CHAR
         tipoCampo=2;
-    if (ui->rb_decimal->isChecked())
+    if (ui->rb_decimal->isChecked())//DECIMAL
         tipoCampo=3;
+    if (ui->rb_ID->isChecked())//ID
+        tipoCampo=4;
 
     int longitudCampo=ui->sp_longitud->value();
     int decimal=ui->sp_decimales->value();
+
     int llave=-1;
     if(ui->rb_primaria->isChecked())
         llave=1;
     if (ui->rd_secundaria->isChecked())
         llave=2;
+    if(ui->rb_noEsLLave->isChecked())
+        llave=-1;
     //validar que no exista mas de una llave
-    Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
+    if(estructura.empty())
+        llavePrimariaDisponible=true;
+    else{
+        Campo Campotemp;
+        for(int i=0; i<estructura.size(); i++){
+            Campotemp=estructura.at(i);
+            cout<<"Campotemp tiene: "<<Campotemp.getKeytype()<<endl;
+            if(Campotemp.getKeytype()==1)
+                llavePrimariaDisponible==false;
+        }
+    }
     //Campo field ("IDPersona", 1, 10, 0, 1);//(name,fieldtype,size,sizedecimal,keytype)
     if(llave==1){
-        if(!llavePrimariaDisponible)
+        if(llavePrimariaDisponible){
+            Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
             estructura.push_back(campoNuevo);
-        else
+        }else
             cout<<"Ya existe llave primaria"<<endl;
-    }else if(llave==-1|| llave==2)
+    }else if(llave==-1|| llave==2){
+        Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
         estructura.push_back(campoNuevo);
+    }
+
 
 
     ui->txt_nameCampo->setText(NULL);
@@ -93,4 +112,10 @@ void Dnuevo::on_rb_decimal_clicked(){
     ui->sp_decimales->setEnabled(true);
     ui->sp_longitud->setEnabled(false);
 
+}
+
+
+void Dnuevo::on_rb_ID_clicked(){
+    ui->sp_decimales->setEnabled(false);
+    ui->sp_longitud->setEnabled(false);
 }

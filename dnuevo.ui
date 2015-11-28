@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>433</width>
+    <width>490</width>
     <height>382</height>
    </rect>
   </property>
@@ -252,11 +252,43 @@
     <string>Decimales</string>
    </property>
   </widget>
+  <widget class="QRadioButton" name="rb_ID">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>130</y>
+     <width>117</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ID</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
+  </widget>
+  <widget class="QRadioButton" name="rb_noEsLLave">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>230</y>
+     <width>117</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>No es llave</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">tipoLLave</string>
+   </attribute>
+  </widget>
  </widget>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="tipoLLave"/>
   <buttongroup name="fileType"/>
+  <buttongroup name="tipoLLave"/>
  </buttongroups>
 </ui>
