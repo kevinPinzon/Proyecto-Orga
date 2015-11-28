@@ -33,6 +33,8 @@ private slots:
 
     void on_rb_ID_clicked();
 
+    void on_rb_primaria_clicked();
+
 private:
     Ui::Dnuevo *ui;
 };

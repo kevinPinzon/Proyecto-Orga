@@ -37,13 +37,11 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
     int longitudCampo=ui->sp_longitud->value();
     int decimal=ui->sp_decimales->value();
 
-    int llave=-1;
+    int llave=0;
     if(ui->rb_primaria->isChecked())
         llave=1;
     if (ui->rd_secundaria->isChecked())
         llave=2;
-    if(ui->rb_noEsLLave->isChecked())
-        llave=-1;
     //validar que no exista mas de una llave
     if(estructura.empty())
         llavePrimariaDisponible=true;
@@ -51,9 +49,9 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         Campo Campotemp;
         for(int i=0; i<estructura.size(); i++){
             Campotemp=estructura.at(i);
-            cout<<"Campotemp tiene: "<<Campotemp.getKeytype()<<endl;
+            cout<<"Campotemp "<<i<<" tiene: "<<Campotemp.getKeytype()<<endl;
             if(Campotemp.getKeytype()==1)
-                llavePrimariaDisponible==false;
+                llavePrimariaDisponible=false;
         }
     }
     //Campo field ("IDPersona", 1, 10, 0, 1);//(name,fieldtype,size,sizedecimal,keytype)
@@ -61,9 +59,9 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         if(llavePrimariaDisponible){
             Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
             estructura.push_back(campoNuevo);
-        }else
+        }if(!llavePrimariaDisponible)
             cout<<"Ya existe llave primaria"<<endl;
-    }else if(llave==-1|| llave==2){
+    }else if(llave==0|| llave==2){
         Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
         estructura.push_back(campoNuevo);
     }
@@ -118,4 +116,9 @@ void Dnuevo::on_rb_decimal_clicked(){
 void Dnuevo::on_rb_ID_clicked(){
     ui->sp_decimales->setEnabled(false);
     ui->sp_longitud->setEnabled(false);
+}
+
+void Dnuevo::on_rb_primaria_clicked(){
+
+
 }
