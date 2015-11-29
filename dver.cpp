@@ -12,7 +12,6 @@ Dver::Dver(QString path,QWidget *parent):QDialog(parent),ui(new Ui::Dver){
     this->path = path;
     ui->setupUi(this);
     llenarTabla();
-
 }
 
 Dver::~Dver()
@@ -58,11 +57,19 @@ void Dver::llenarTabla(){
     */
     //AQUI DEBERIAMOS LEER LOS REGISTROS DEL ARCHIVO
     registro.Leer(fileLEER,estructura);
-    for(int i=0; i<registro.getDatos().size(); i++){
-        string cadenaTemp=registro.getDatos().at(i);
-        cout<<cadenaTemp<<endl;
-        ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
-        //ui->tb_productos->setItem(i,0,new QTableWidgetItem(nombre .data()));
+    contRegistros=registro.getDatos().size();
+    if(registro.getDatos().size()>10){
+        for(int i=0; i<10; i++){
+            string cadenaTemp=registro.getDatos().at(i);
+            cout<<cadenaTemp<<endl;
+            ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
+        }
+    }else{
+        for(int i=0; i<registro.getDatos().size(); i++){
+            string cadenaTemp=registro.getDatos().at(i);
+            cout<<cadenaTemp<<endl;
+            ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
+        }
     }
     tabla->setRowCount(tabla->rowCount()+1);
 }
@@ -89,18 +96,24 @@ void Dver::leerHeader(){
 
 void Dver::on_btn_agregarRegistro_clicked(){
     QTableWidgetItem *itemTemp;
-    cout<<"columas: "<<ui->tw_registros->columnCount()<<endl;
-    for(int j=0; j<ui->tw_registros->columnCount(); j++){
+    //VALIDAR QUE LA ULTIMA FILA TENGA DATOS Y SEAN LOS CORRECTOS
+    /*for(int j=0; j<ui->tw_registros->columnCount(); j++){
         itemTemp = ui->tw_registros->item(ui->tw_registros->rowCount()-1,j);
         registro.agregarDato(itemTemp->text().toStdString());
     }
-    fileESCRIBIR.open(path.toStdString().c_str(), ios::in | ios::out | ios::app);
-        if (fileESCRIBIR.is_open()){
+    */if (fileESCRIBIR.is_open()){
             //aqui deberiamos de escribir todo un vector de registros
             registro.Escribir(fileESCRIBIR, estructura);
         }
+    else{
+        fileESCRIBIR.open(path.toStdString().c_str(), ios::in | ios::out | ios::app);
+        if (fileESCRIBIR.is_open()){
+                //aqui deberiamos de escribir todo un vector de registros
+                registro.Escribir(fileESCRIBIR, estructura);
+            }
+    }
     ui->tw_registros->setRowCount(ui->tw_registros->rowCount()+1);
-
+    cout<<"El registro se agregado y es el registro #"<<registro.getDatos().size()<<endl;
 }
 
 void Dver::on_tw_registros_itemClicked(QTableWidgetItem *item){
@@ -109,7 +122,6 @@ void Dver::on_tw_registros_itemClicked(QTableWidgetItem *item){
 }
 
 void Dver::on_pushButton_2_clicked(){
-    cout<<"Registro tiene: "<<endl;
     for(int i=0; i<registro.getDatos().size(); i++){
         string temp=registro.getDatos().at(i);
         cout<<temp<<endl;
@@ -118,5 +130,19 @@ void Dver::on_pushButton_2_clicked(){
     fileLEER.close();
     fileESCRIBIR.close();
     this->close();
+
+}
+
+void Dver::on_pushButton_clicked(){
+    contRegistros=contRegistros-10;
+    if(contRegistros>0){
+        for(int i=0; i<10; i++){
+            string cadenaTemp=registro.getDatos().at(i);
+            cout<<cadenaTemp<<endl;
+            ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
+        }
+        ui->tw_registros->setRowCount(ui->tw_registros->rowCount()+1);
+    }else
+        cout<<"ERROR: "<<endl<<"No hay mas registros que mostrar"<<endl;
 
 }

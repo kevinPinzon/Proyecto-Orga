@@ -33,6 +33,7 @@ public:
     ifstream fileLEER;
     ofstream fileESCRIBIR;
     int row;
+    int contRegistros;
 private slots:
     void on_pushButton_clicked();
     
