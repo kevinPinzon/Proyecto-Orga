@@ -49,18 +49,21 @@ void Dver::llenarTabla(){
     tabla->setColumnCount(estructura.size());
     tabla->setHorizontalHeaderLabels(encabezados);
     /*Registro r;
+    r.agregarDato("01");
     r.agregarDato("kevin");
     r.agregarDato("22");
-    r.agregarDato("0801");
-    r.agregarDato("05");
+    r.agregarDato("1.78");
+    r.agregarDato("22359428");
     cout<<r.getDatos().size()<<endl;
-    tabla->setRowCount(tabla->rowCount());
-    for(int i=0; i<r.getDatos().size(); i++){
-        string cadenaTemp=r.getDatos().at(i);
+    */
+    //AQUI DEBERIAMOS LEER LOS REGISTROS DEL ARCHIVO
+    registro.Leer(fileLEER,estructura);
+    for(int i=0; i<registro.getDatos().size(); i++){
+        string cadenaTemp=registro.getDatos().at(i);
         cout<<cadenaTemp<<endl;
-        tabla->setItem(tabla->rowCount()-1,i,new QTableWidgetItem(cadenaTemp.data()));
+        ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
+        //ui->tb_productos->setItem(i,0,new QTableWidgetItem(nombre .data()));
     }
-*/
     tabla->setRowCount(tabla->rowCount()+1);
 }
 
@@ -76,7 +79,7 @@ void Dver::leerHeader(){
             for (int i=0;i<temp.size();i++){
                 while (temp[i] != '\t' ){
                     if ( temp[i] == '-' )
-                        pos= i;  // Solo subes quando encuentra el primer caracter, y por eso
+                        pos= i;  // Solo subes cuando encuentra el primer caracter, y por eso
                      i++; // es igual a i = i + 1
                 }
             }
