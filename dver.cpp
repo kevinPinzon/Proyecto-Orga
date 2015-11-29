@@ -1,12 +1,14 @@
 #include "dver.h"
 #include "campo.h"
 #include "ui_dver.h"
+#include <sstream>
 #include <QFile>
 #include <QTextStream>
 #include <QTableWidget>
 #include <QInputDialog>
 #include <QDebug>
 #include<QStandardItemModel>
+#include <QMessageBox>
 
 Dver::Dver(QString path,QWidget *parent):QDialog(parent),ui(new Ui::Dver){
     this->path = path;
@@ -113,7 +115,9 @@ void Dver::on_btn_agregarRegistro_clicked(){
             }
     }
     ui->tw_registros->setRowCount(ui->tw_registros->rowCount()+1);
-    cout<<"El registro se agregado y es el registro #"<<registro.getDatos().size()<<endl;
+    stringstream tempCad;
+    tempCad<<"  El nuevo registro es el  #"<<registro.getDatos().size()<<"   ";
+    QMessageBox::information(this," Registro agregado    ",tempCad.str().c_str());
 }
 
 void Dver::on_tw_registros_itemClicked(QTableWidgetItem *item){
@@ -142,7 +146,18 @@ void Dver::on_pushButton_clicked(){
             ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
         }
         ui->tw_registros->setRowCount(ui->tw_registros->rowCount()+1);
-    }else
-        cout<<"ERROR: "<<endl<<"No hay mas registros que mostrar"<<endl;
+    }else{
+        QMessageBox::information(this,"ERROR","No hay mas registros que mostrar");
 
+    }
+        //cout<<"ERROR: "<<endl<<"No hay mas registros que mostrar"<<endl;
+
+}
+
+void Dver::on_btn_modificarRegistro_clicked(){
+    QMessageBox::information(this,"En construccion","       ..............................  ");
+}
+
+void Dver::on_btn_eliminarRegistro_clicked(){
+    QMessageBox::information(this,"En construccion","       ..............................  ");
 }

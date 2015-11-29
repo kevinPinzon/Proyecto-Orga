@@ -43,7 +43,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         llave=1;
     if (ui->rd_secundaria->isChecked())
         llave=2;
-    //validar que no exista mas de una llave
+    //VALIDACIONES
     if(estructura.empty())
         llavePrimariaDisponible=true;
     else{

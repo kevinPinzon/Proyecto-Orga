@@ -43,6 +43,10 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_btn_modificarRegistro_clicked();
+
+    void on_btn_eliminarRegistro_clicked();
+
 private:
     Ui::Dver *ui;
 };
