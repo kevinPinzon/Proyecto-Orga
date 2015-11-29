@@ -17,14 +17,17 @@ SOURCES += main.cpp\
     dnuevo.cpp \
     campo.cpp \
     dver.cpp \
-    registro.cpp
+    registro.cpp \
+    operacionescampos.cpp
 
 HEADERS  += mainwindow.h \
     dnuevo.h \
     campo.h \
     dver.h \
-    registro.h
+    registro.h \
+    operacionescampos.h
 
 FORMS    += mainwindow.ui \
     dnuevo.ui \
-    dver.ui
+    dver.ui \
+    operacionescampos.ui

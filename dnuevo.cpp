@@ -6,7 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-
+#include <QMessageBox>
 
 using namespace std;
 
@@ -44,44 +44,51 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
     if (ui->rd_secundaria->isChecked())
         llave=2;
     //VALIDACIONES
-    if(estructura.empty())
-        llavePrimariaDisponible=true;
-    else{
-        for(int i=0; i<estructura.size(); i++){
-            Campotemp=estructura.at(i);
-            cout<<"Campotemp "<<i<<" tiene: "<<Campotemp.getKeytype()<<endl;
-            if(Campotemp.getKeytype()==1)
-                llavePrimariaDisponible=false;
-        }
-    }
-    //Campo field ("IDPersona", 1, 10, 0, 1);//(name,fieldtype,size,sizedecimal,keytype)
-    bool primeraValidacion=false,segundaValidacion=true;
-    if(llave==1){
-        if(llavePrimariaDisponible)
-            primeraValidacion=true;
-        if(!llavePrimariaDisponible)
-            cout<<"ERROR: "<<endl<<"Ya existe llave primaria"<<endl;
-    }else if(llave==0|| llave==2)
-        primeraValidacion=true;
+    if(nombreCampo.empty()){
+        QMessageBox::information(this,"Error","Es necesario que escriba un nombre para el campo");
+    }else{
 
-    if(primeraValidacion){
-        if(!estructura.empty()){
+        if(estructura.empty())
+            llavePrimariaDisponible=true;
+        else{
             for(int i=0; i<estructura.size(); i++){
-                if(nombreCampo.compare(estructura.at(i).getName())==0)
-                    segundaValidacion=false;
+                Campotemp=estructura.at(i);
+                if(Campotemp.getKeytype()==1)
+                    llavePrimariaDisponible=false;
             }
         }
-    }
-    if(segundaValidacion){
+        //Campo field ("IDPersona", 1, 10, 0, 1);//(name,fieldtype,size,sizedecimal,keytype)
+        bool primeraValidacion=false,segundaValidacion=true;
+        if(llave==1){
+            if(llavePrimariaDisponible)
+                primeraValidacion=true;
+            if(!llavePrimariaDisponible){
+                QMessageBox::information(this,"Error"," Ya existe un campo que es llave primaria");
+            }
+        }else if(llave==0|| llave==2)
+            primeraValidacion=true;
 
-        Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
-        estructura.push_back(campoNuevo);
-    }else{
-        cout<<"ERROR:"<<endl<<" Ya existe un campo con el nombre "<<nombreCampo<<endl;
-    }
+        if(primeraValidacion){
+            if(!estructura.empty()){
+                for(int i=0; i<estructura.size(); i++){
+                    if(nombreCampo.compare(estructura.at(i).getName())==0)
+                        segundaValidacion=false;
+                }
+            }
+        }
+        if(segundaValidacion){
 
-    ui->txt_nameCampo->setText(NULL);
-    ui->sp_longitud->setValue(1);
+            Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
+            estructura.push_back(campoNuevo);
+        }else{
+            stringstream ss;
+            ss<<"   Ya existe un campo con el nombre: "<<nombreCampo;
+            QMessageBox::information(this,"Error",ss.str().c_str());
+        }
+
+        ui->txt_nameCampo->setText(NULL);
+        ui->sp_longitud->setValue(1);
+    }
 }
 
 void Dnuevo::on_btn_nuevoArchivo_clicked(){
@@ -90,20 +97,31 @@ void Dnuevo::on_btn_nuevoArchivo_clicked(){
     nameA<<nombreArchivo<<".dat";
     ofstream archivo;
     Campo field;
-    if(!estructura.empty()){
-        archivo.open(nameA.str().c_str(), ios::in | ios::out | ios::trunc);
-        cantidadCampos=estructura.size();
-        archivo<<cantidadCampos;
-        archivo<<",";
-        for (int i = 0; i < estructura.size(); ++i){
-                field = estructura.at(i);
-                cout << field.toString() << endl;
-                archivo << field;
-            }
+    if(nombreArchivo.empty()){
+        QMessageBox::information(this,"Error","Es necesario que escriba un nombre para el archivo");
+    }else{
+        if(!estructura.empty()){
+            if(!llavePrimariaDisponible){
+                archivo.open(nameA.str().c_str(), ios::in | ios::out | ios::trunc);
+                cantidadCampos=estructura.size();
+                archivo<<cantidadCampos;
+                archivo<<",";
+                for (int i = 0; i < estructura.size(); ++i){
+                        field = estructura.at(i);
+                       // cout << field.toString() << endl;
+                        archivo << field;
+                    }
 
-    archivo.close();
+            archivo.close();
+            this->close();
+            }else
+            QMessageBox::information(this,"Error","Necesita crear un campo que sea llave primaria");
+        }else{
+            QMessageBox::information(this,"Error","Necesita crear al menos un campo");
+        }
+
+
     }
-    this->close();
 }
 
 void Dnuevo::on_rb_int_clicked(){

@@ -88,6 +88,19 @@
     <string>Eliminar Registro</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>540</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Operaciones de campos</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

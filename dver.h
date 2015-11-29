@@ -26,14 +26,16 @@ public:
     Campo field;
     int cantDeCampos;
     vector <Campo> estructura;
+    vector <Registro> VRegistros;
+    Registro registro;
     QFile archivo;
     QString path;
     void llenarTabla();
-    Registro registro;
     ifstream fileLEER;
     ofstream fileESCRIBIR;
     int row;
     int contRegistros;
+
 private slots:
     void on_pushButton_clicked();
     
@@ -46,6 +48,8 @@ private slots:
     void on_btn_modificarRegistro_clicked();
 
     void on_btn_eliminarRegistro_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::Dver *ui;

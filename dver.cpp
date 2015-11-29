@@ -9,6 +9,7 @@
 #include <QDebug>
 #include<QStandardItemModel>
 #include <QMessageBox>
+#include"operacionescampos.h"
 
 Dver::Dver(QString path,QWidget *parent):QDialog(parent),ui(new Ui::Dver){
     this->path = path;
@@ -58,10 +59,12 @@ void Dver::llenarTabla(){
     cout<<r.getDatos().size()<<endl;
     */
     //AQUI DEBERIAMOS LEER LOS REGISTROS DEL ARCHIVO
+    //se debe leer y guardar cada registro en un registro temp y luego hacerle push al VRegistros
+    //luego con el VRegistros llenar la tabla de registros
     registro.Leer(fileLEER,estructura);
     contRegistros=registro.getDatos().size();
     if(registro.getDatos().size()>10){
-        for(int i=0; i<10; i++){
+        for(unsigned int i=0; i<10; i++){
             string cadenaTemp=registro.getDatos().at(i);
             cout<<cadenaTemp<<endl;
             ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
@@ -160,4 +163,10 @@ void Dver::on_btn_modificarRegistro_clicked(){
 
 void Dver::on_btn_eliminarRegistro_clicked(){
     QMessageBox::information(this,"En construccion","       ..............................  ");
+}
+
+void Dver::on_pushButton_3_clicked(){
+    OperacionesCampos a(this);
+    a.exec();
+
 }
