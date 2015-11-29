@@ -67,7 +67,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
                 bool bandera = true;
                 int sizeTemp=estructura.at(i).getSize();
                 for (int j = 0; j < sizeTemp; ++j){
-                    if (datos.at(i)[j] == '\0')
+                    if (datos.at(i)[j] == '\t')
                         bandera = false;
                     if (bandera){
                         ss << datos.at(i)[j];

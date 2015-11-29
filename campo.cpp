@@ -72,10 +72,10 @@ string Campo::toStringArchivo() const{
     }
     ss << ",";
 
-    ss << inttoString(fieldtype, true) << ",";
-    ss << inttoString(size, true) << ",";
-    ss << inttoString(sizedecimal, true) << ",";
-    ss << inttoString(keytype, true) << "\t";
+    ss << inttoString(fieldtype, false) << ",";
+    ss << inttoString(size, false) << ",";
+    ss << inttoString(sizedecimal, false) << ",";
+    ss << inttoString(keytype, false) << "\t";
 
     return ss.str();
 }

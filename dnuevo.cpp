@@ -55,7 +55,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         }
     }
     //Campo field ("IDPersona", 1, 10, 0, 1);//(name,fieldtype,size,sizedecimal,keytype)
-    bool primeraValidacion=false,segundaValidacion=false;
+    bool primeraValidacion=false,segundaValidacion=true;
     if(llave==1){
         if(llavePrimariaDisponible)
             primeraValidacion=true;
@@ -65,9 +65,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         primeraValidacion=true;
 
     if(primeraValidacion){
-        if(estructura.empty())
-            segundaValidacion=true;
-        else{
+        if(!estructura.empty()){
             for(int i=0; i<estructura.size(); i++){
                 if(nombreCampo.compare(estructura.at(i).getName())==0)
                     segundaValidacion=false;
@@ -75,6 +73,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         }
     }
     if(segundaValidacion){
+
         Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
         estructura.push_back(campoNuevo);
     }else{
