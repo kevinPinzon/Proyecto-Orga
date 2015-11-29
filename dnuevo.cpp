@@ -23,6 +23,7 @@ Dnuevo::~Dnuevo()
 }
 
 void Dnuevo::on_btn_agregarCampo_clicked(){
+    Campo Campotemp;
     string nombreCampo=ui->txt_nameCampo->text().toStdString();
     int tipoCampo=-1;//1-entero,2-char,3-decimal
     if(ui->rb_int->isChecked())//ENTERO
@@ -46,7 +47,6 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
     if(estructura.empty())
         llavePrimariaDisponible=true;
     else{
-        Campo Campotemp;
         for(int i=0; i<estructura.size(); i++){
             Campotemp=estructura.at(i);
             cout<<"Campotemp "<<i<<" tiene: "<<Campotemp.getKeytype()<<endl;
@@ -55,18 +55,31 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         }
     }
     //Campo field ("IDPersona", 1, 10, 0, 1);//(name,fieldtype,size,sizedecimal,keytype)
+    bool primeraValidacion=false,segundaValidacion=false;
     if(llave==1){
-        if(llavePrimariaDisponible){
-            Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
-            estructura.push_back(campoNuevo);
-        }if(!llavePrimariaDisponible)
-            cout<<"Ya existe llave primaria"<<endl;
-    }else if(llave==0|| llave==2){
+        if(llavePrimariaDisponible)
+            primeraValidacion=true;
+        if(!llavePrimariaDisponible)
+            cout<<"ERROR: "<<endl<<"Ya existe llave primaria"<<endl;
+    }else if(llave==0|| llave==2)
+        primeraValidacion=true;
+
+    if(primeraValidacion){
+        if(estructura.empty())
+            segundaValidacion=true;
+        else{
+            for(int i=0; i<estructura.size(); i++){
+                if(nombreCampo.compare(estructura.at(i).getName())==0)
+                    segundaValidacion=false;
+            }
+        }
+    }
+    if(segundaValidacion){
         Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
         estructura.push_back(campoNuevo);
+    }else{
+        cout<<"ERROR:"<<endl<<" Ya existe un campo con el nombre "<<nombreCampo<<endl;
     }
-
-
 
     ui->txt_nameCampo->setText(NULL);
     ui->sp_longitud->setValue(1);

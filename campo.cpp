@@ -31,7 +31,7 @@ string Campo::toString()const{
 
 string Campo::inttoString(int num, bool edilson) const{
     stringstream ss;
-    if (edilson){//edilson es true todo lo que no sea ID
+    if (edilson){
         if(num < 10){
             ss << "00" << num;
         } else if (num <100){
@@ -39,7 +39,7 @@ string Campo::inttoString(int num, bool edilson) const{
         } else {
             ss<<num;
         }
-    } else {//edilson es false y para ID
+    } else {//para ID
         if(num < 10){
             ss << "00000" << num;
         } else if (num <100){

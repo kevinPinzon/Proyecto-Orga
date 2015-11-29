@@ -28,7 +28,7 @@ string Registro::toString()const{
 
 string Registro::inttoString(int num, bool edilson) const{
     stringstream ss;
-    if (edilson){//edilson es true todo lo que no sea ID
+    if (edilson){//
         if(num < 10){
             ss << "00" << num;
         } else if (num <100){
@@ -36,7 +36,7 @@ string Registro::inttoString(int num, bool edilson) const{
         } else {
             ss<<num;
         }
-    } else {//edilson es false y para ID
+    } else {//para ID
         if(num < 10){
             ss << "00000" << num;
         } else if (num <100){
@@ -59,9 +59,11 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
     stringstream ss;
         //string valor; aqui pongo el string en datos.at(i)
         for (int i=0; i<datos.size(); i++){
-            if (estructura.at(i).getFieldtype() == 0)//entero
+            if(estructura.at(i).getFieldtype() == 4)//ID
+                ss<<inttoString(atoi(datos.at(i).c_str()), true);
+            if (estructura.at(i).getFieldtype() == 1)//entero
                 ss<<inttoString(atoi(datos.at(i).c_str()), false);
-            if (estructura.at(i).getFieldtype() == 1){//texto
+            if (estructura.at(i).getFieldtype() == 2){//texto
                 bool bandera = true;
                 int sizeTemp=estructura.at(i).getSize();
                 for (int j = 0; j < sizeTemp; ++j){
@@ -74,7 +76,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
                     }
                 }
             }
-            if (estructura.at(i).getFieldtype()== 2){//decimal
+            if (estructura.at(i).getFieldtype()== 3){//decimal
                 string numerodecimal, parteEntero, parteDecimal;
                 int tamaodecimal = estructura.at(i).getSizedecimal();
                 numerodecimal = datos.at(i);
