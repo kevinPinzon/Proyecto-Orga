@@ -16,6 +16,7 @@ Dver::Dver(QString path,QWidget *parent):QDialog(parent),ui(new Ui::Dver){
     ui->setupUi(this);
     llenarTabla();
 }
+sdfdf
 
 Dver::~Dver()
 {
@@ -166,7 +167,13 @@ void Dver::on_btn_eliminarRegistro_clicked(){
 }
 
 void Dver::on_pushButton_3_clicked(){
-    OperacionesCampos a(this);
-    a.exec();
+    //Validar que no existan registros
+    Registro a;
+    VRegistros.push_back(a);
+    if(VRegistros.size()!=0){
+
+    }else{
+        QMessageBox::information(this,"ERROR"," No Puede modificar los campos, porque existen registros");
+    }
 
 }
