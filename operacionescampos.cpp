@@ -31,7 +31,39 @@ void OperacionesCampos::llenarComboBoxCampos(){
 }
 
 void OperacionesCampos::on_btn_modificarCampo_clicked(){
+    //VALIDACIONES
+    bool camposLLenos=true;
+    bool nombreDisponible=true;
+    if(ui->txt_nameCampo->text().toStdString().empty())
+        camposLLenos=false;
 
+    if(index!=-1 && camposLLenos){
+        for(int i=0; i<estructura.size(); i++){
+            string temp=estructura.at(i).getName();
+            if(temp.compare(ui->txt_nameCampo->text().toStdString()))
+                nombreDisponible=false;
+        }
+    }
+    if(nombreDisponible)
+        estructura.at(index).setName(ui->txt_nameCampo->text().toStdString().c_str());
+    index=-1;
+    bool escribir=false;
+
+/*  if(archivo.is_open()){
+        escribir=true;
+    }else
+        archivo.open(path.toStdString().c_str(), ios::in | ios::out | ios::trunc);
+
+    int cantidadCampos=estructura.size();
+    archivo<<cantidadCampos;
+    archivo<<",";
+    for (int i = 0; i < estructura.size(); ++i){
+            field = estructura.at(i);
+            archivo << field;
+        }
+    archivo.close();
+    this->close();
+*/
 }
 
 void OperacionesCampos::on_btn_eliminarCampo_clicked(){
@@ -76,10 +108,19 @@ void OperacionesCampos::on_cb_campos_currentIndexChanged(int index){
 
     if(temp.getKeytype()==0)
         ui->rb_noEsLLave->setChecked(true);
+        ui->rb_noEsLLave->setEnabled(true);
+        ui->rb_primaria->setEnabled(false);
+        ui->rb_secundaria->setEnabled(true);
     if(temp.getKeytype()==1)
         ui->rb_primaria->setChecked(true);
+        ui->rb_primaria->setEnabled(true);
+        ui->rb_secundaria->setEnabled(false);
+        ui->rb_noEsLLave->setEnabled(false);
     if(temp.getKeytype()==2)
         ui->rb_secundaria->setChecked(true);
+        ui->rb_secundaria->setEnabled(true);
+        ui->rb_primaria->setEnabled(false);
+        ui->rb_noEsLLave->setEnabled(true);
 
 
 }

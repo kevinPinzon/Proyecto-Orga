@@ -21,8 +21,9 @@ public:
     string inttoString(int, bool) const;
     string toStringArchivo(vector<Campo>)const;
     void Escribir(ofstream&, vector<Campo>);
-    void Leer(ifstream&, vector<Campo>);
+    bool Leer(ifstream&, vector<Campo>);
     void agregarDato(string);
+    void clear();
 
 };
 
