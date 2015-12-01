@@ -59,7 +59,8 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
     stringstream ss;
         //string valor; aqui pongo el string en datos.at(i)
         for (int i=0; i<datos.size(); i++){
-            if(estructura.at(i).getFieldtype() == 4)//ID
+            cout<<" tipo: "<<estructura.at(i).getFieldtype()<<endl;
+            if(estructura.at(i).getFieldtype() == 4 )//ID
                 ss<<inttoString(atoi(datos.at(i).c_str()), true);
             if (estructura.at(i).getFieldtype() == 1)//entero
                 ss<<inttoString(atoi(datos.at(i).c_str()), false);
@@ -67,7 +68,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
                 bool bandera = true;
                 int sizeTemp=estructura.at(i).getSize();
                 for (int j = 0; j < sizeTemp; ++j){
-                    if (datos.at(i)[j] == '\t')
+                    if (datos.at(i)[j] == '\0')
                         bandera = false;
                     if (bandera){
                         ss << datos.at(i)[j];
@@ -108,6 +109,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
 }
 
     void Registro::Escribir(ofstream& archivo, vector<Campo> estructura){
+      cout<<" to string en archivo: "<<toStringArchivo(estructura)<<endl;
         archivo << toStringArchivo (estructura);
     }
 

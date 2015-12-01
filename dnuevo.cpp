@@ -23,9 +23,10 @@ Dnuevo::~Dnuevo()
 }
 
 void Dnuevo::on_btn_agregarCampo_clicked(){
+
     Campo Campotemp;
     string nombreCampo=ui->txt_nameCampo->text().toStdString();
-    int tipoCampo=-1;//1-entero,2-char,3-decimal
+    int tipoCampo=-1;//1-entero 2-char  3-decimal   4-ID
     if(ui->rb_int->isChecked())//ENTERO
         tipoCampo=1;
     if(ui->rb_char->isChecked())//CHAR
@@ -64,9 +65,13 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
                 primeraValidacion=true;
             if(!llavePrimariaDisponible){
                 QMessageBox::information(this,"Error"," Ya existe un campo que es llave primaria");
+
             }
-        }else if(llave==0|| llave==2)
+            if(primeraValidacion)
+                llavePrimariaDisponible=false;
+        }else if(llave!=1)
             primeraValidacion=true;
+
 
         if(primeraValidacion){
             if(!estructura.empty()){
@@ -76,9 +81,8 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
                 }
             }
         }
-        if(segundaValidacion){
-
-            Campo campoNuevo(nombreCampo.c_str(),longitudCampo,tipoCampo,decimal,llave);
+        if(segundaValidacion && primeraValidacion){
+            Campo campoNuevo(nombreCampo.c_str(),tipoCampo,longitudCampo,decimal,llave);
             estructura.push_back(campoNuevo);
         }else{
             stringstream ss;
@@ -111,9 +115,9 @@ void Dnuevo::on_btn_nuevoArchivo_clicked(){
                        // cout << field.toString() << endl;
                         archivo << field;
                     }
-
-            archivo.close();
-            this->close();
+                llavePrimariaDisponible=true;
+                archivo.close();
+                this->close();
             }else
             QMessageBox::information(this,"Error","Necesita crear un campo que sea llave primaria");
         }else{

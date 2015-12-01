@@ -35,6 +35,7 @@ public:
     ofstream fileESCRIBIR;
     int row;
     int contRegistros;
+    void actualizarRegistro();
 
 private slots:
     void on_pushButton_clicked();

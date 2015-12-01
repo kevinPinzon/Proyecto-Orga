@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Operaciones de Campos</string>
+   <string>Dialog</string>
   </property>
   <widget class="QRadioButton" name="rb_decimal">
    <property name="geometry">
@@ -25,6 +25,9 @@
    <property name="text">
     <string>Decimal</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
   </widget>
   <widget class="QRadioButton" name="rb_char">
    <property name="geometry">
@@ -38,6 +41,9 @@
    <property name="text">
     <string>Char</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
   </widget>
   <widget class="QRadioButton" name="rb_noEsLLave">
    <property name="geometry">
@@ -51,6 +57,9 @@
    <property name="text">
     <string>No es llave</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">llaves</string>
+   </attribute>
   </widget>
   <widget class="QSpinBox" name="sp_decimales">
    <property name="geometry">
@@ -96,6 +105,9 @@
    <property name="text">
     <string>LLave primaria</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">llaves</string>
+   </attribute>
   </widget>
   <widget class="QLabel" name="label_6">
    <property name="geometry">
@@ -161,6 +173,9 @@
    <property name="text">
     <string>Int</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
   </widget>
   <widget class="QRadioButton" name="rb_ID">
    <property name="geometry">
@@ -174,6 +189,9 @@
    <property name="text">
     <string>ID</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
   </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
@@ -188,7 +206,7 @@
     <string>Tipo de campo</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="rd_secundaria">
+  <widget class="QRadioButton" name="rb_secundaria">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -200,6 +218,9 @@
    <property name="text">
     <string>LLave secundaria</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">llaves</string>
+   </attribute>
   </widget>
   <widget class="QComboBox" name="cb_campos">
    <property name="geometry">
@@ -266,4 +287,8 @@
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="fileType"/>
+  <buttongroup name="llaves"/>
+ </buttongroups>
 </ui>

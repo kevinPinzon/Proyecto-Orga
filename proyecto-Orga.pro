@@ -18,16 +18,19 @@ SOURCES += main.cpp\
     campo.cpp \
     dver.cpp \
     registro.cpp \
-    operacionescampos.cpp
+    operacionescampos.cpp \
+    agregarregistro.cpp
 
 HEADERS  += mainwindow.h \
     dnuevo.h \
     campo.h \
     dver.h \
     registro.h \
-    operacionescampos.h
+    operacionescampos.h \
+    agregarregistro.h
 
 FORMS    += mainwindow.ui \
     dnuevo.ui \
     dver.ui \
-    operacionescampos.ui
+    operacionescampos.ui \
+    agregarregistro.ui
