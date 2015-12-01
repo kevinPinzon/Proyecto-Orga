@@ -86,7 +86,7 @@ istream& operator>>(istream& input, Campo& campo){
 	input.ignore();
 	cout << "char: Nombre de campo" << endl;
 	input.getline(campo.name, 30);
-	cout << "int: fieldtype donde 1- entero 2- textp 3- decimal" << endl;
+	cout << "int: fieldtype donde 0- entero 2- textp 3- decimal" << endl;
 	input >> campo.fieldtype;
 	cout << "int: size para longitud de cadena de texto" << endl;
 	input >> campo.size;

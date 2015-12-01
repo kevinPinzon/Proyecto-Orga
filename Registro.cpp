@@ -104,6 +104,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
 			ss << "\t";
 		}
 	}
+	//cout << "Tamaño del registro: " << sizeof(ss.str()) << endl;
 	return ss.str();
 }
 
@@ -111,14 +112,45 @@ void Registro::Escribir(ofstream& archivo, vector<Campo> estructura){
 	archivo << toStringArchivo (estructura);
 }
 
-void Registro::Leer(ifstream& archivo, vector<Campo> estructura){
+bool Registro::Leer(ifstream& archivo, vector<Campo> estructura){
+	string linea, sublinea;
+	char str[100];
+	int pos1=0, pos2;
+	if (!archivo.getline(str, 100, '\t'))
+		return false;
+	linea = str;
+	for (int i =0; i < estructura.size(); i++){
+		pos2 = linea.find(',', pos1);
+		sublinea = linea.substr(pos1, pos2-pos1);
+		if (estructura.at(i).getFieldtype() == 0 || estructura.at(i).getFieldtype() == 4){
+			//cout << "es de tipo entero o ID " << endl;
+			while (sublinea[0] == '0'){
+				//cout << sublinea.at(0) << endl;
+				sublinea.erase(0,1); 
+			}
+		}
+		if (estructura.at(i).getFieldtype() == 1){
+			pos1 = sublinea.find('-', 0);
+			sublinea.erase(pos1, sublinea.size()-pos1);
+		}
+		pos1 = pos2+1;
+		//cout << sublinea << endl;
+		agregarDato(sublinea);
+	}
+	 
+	return true;
 
 }
+
 vector<string> Registro::getDatos(){
 	return datos;
 }	
 
 void Registro::agregarDato(string datoN){
 	datos.push_back(datoN);
-	cout << "size de datos "<<datos.size()<< endl; 
+	//cout << "size de datos "<<datos.size()<< endl; 
+}
+
+void Registro::clear(){
+	datos.clear();
 }
