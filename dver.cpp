@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include"operacionescampos.h"
 #include"agregarregistro.h"
+#include"modificarregistro.h"
 
 Dver::Dver(QString path,QWidget *parent):QDialog(parent),ui(new Ui::Dver){
     this->path = path;
@@ -51,11 +52,10 @@ void Dver::llenarTabla(){
     }
     tabla->setColumnCount(estructura.size());
     tabla->setHorizontalHeaderLabels(encabezados);
-    cout<<"vamos bien1"<<endl;
     int i;
     if(fileLEER.is_open()){
         while (registro.Leer(fileLEER, estructura)){
-                cout<<"vuelta: "<<i<<endl;
+                //cout<<"vuelta: "<<i<<endl;
                 VRegistros.push_back(registro);
                 registro.clear();
                 i++;
@@ -63,36 +63,14 @@ void Dver::llenarTabla(){
 
     }else
         cerr<<"No se pudo abrir el archivo, para lectura de registros"<<endl;
-    cout<<"vamos bien2"<<endl;
     actualizarRegistro();
-
-/*    registro.Leer(fileLEER,estructura);
-    contRegistros=registro.getDatos().size();
-    if(registro.getDatos().size()>10){
-        for(unsigned int i=0; i<10; i++){
-            string cadenaTemp=registro.getDatos().at(i);
-            cout<<cadenaTemp<<endl;
-            ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
-        }
-    }else{
-        for(int i=0; i<registro.getDatos().size(); i++){
-            string cadenaTemp=registro.getDatos().at(i);
-            cout<<cadenaTemp<<endl;
-            ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
-        }
-    }
-    tabla->setRowCount(tabla->rowCount()+1);
-*/
+    tabla->setEnabled(false);
 
 }
 
 
 void Dver::on_btn_agregarRegistro_clicked(){
-    //AQUI DEBERIAMOS LEER LOS REGISTROS DEL ARCHIVO
-    //se debe leer y guardar cada registro en un registro temp y luego hacerle push al VRegistros
-    //luego con el VRegistros llenar la tabla de registros
-
-    AgregarRegistro add(path,estructura,this);
+    AgregarRegistro add(path,estructura,VRegistros,this);
     add.exec();
     if(add.seAgrego){
         VRegistros.push_back(add.actualizarTabla());
@@ -102,7 +80,7 @@ void Dver::on_btn_agregarRegistro_clicked(){
 }
 
 void Dver::actualizarRegistro(){
-    int contRegistros = VRegistros.size();
+    int contRegistros = VRegistros.size()+1;
     ui->tw_registros->setRowCount(contRegistros);
     Registro registroTemp;
     string cadenaTemp;
@@ -135,24 +113,23 @@ void Dver::on_pushButton_2_clicked(){
 }
 
 void Dver::on_pushButton_clicked(){
-    contRegistros=contRegistros-10;
-    if(contRegistros>0){
+   /* if(contRegistros>0){
         for(int i=0; i<10; i++){
             string cadenaTemp=registro.getDatos().at(i);
-            cout<<cadenaTemp<<endl;
+            //cout<<cadenaTemp<<endl;
             ui->tw_registros->setItem(ui->tw_registros->rowCount(),i,new QTableWidgetItem(cadenaTemp.data()));
         }
         ui->tw_registros->setRowCount(ui->tw_registros->rowCount()+1);
+        contRegistros=contRegistros-10;
     }else{
         QMessageBox::information(this,"ERROR","No hay mas registros que mostrar");
 
     }
-        //cout<<"ERROR: "<<endl<<"No hay mas registros que mostrar"<<endl;
-
+    */
 }
 
 void Dver::on_btn_modificarRegistro_clicked(){
-    QMessageBox::information(this,"En construccion","       ..............................  ");
+ int i=QMessageBox::question(this,"Modificar"," Digite la posicion del registro que desea modificar ");
 }
 
 void Dver::on_btn_eliminarRegistro_clicked(){

@@ -31,7 +31,7 @@ string Campo::toString()const{
 
 string Campo::inttoString(int num, bool edilson) const{
     stringstream ss;
-    if (edilson){
+    if (!edilson){
         if(num < 10){
             ss << "00" << num;
         } else if (num <100){

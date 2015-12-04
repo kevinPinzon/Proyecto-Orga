@@ -110,6 +110,7 @@ void Dnuevo::on_btn_nuevoArchivo_clicked(){
                 cantidadCampos=estructura.size();
                 archivo<<cantidadCampos;
                 archivo<<",";
+                //escribir availlist
                 for (int i = 0; i < estructura.size(); ++i){
                         field = estructura.at(i);
                        // cout << field.toString() << endl;

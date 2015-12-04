@@ -16,8 +16,9 @@ class AgregarRegistro : public QDialog
     Q_OBJECT
 
 public:
-    explicit AgregarRegistro(QString path,vector<Campo> , QWidget *parent = 0);
+    explicit AgregarRegistro(QString path,vector<Campo>,vector<Registro>, QWidget *parent = 0);
     ~AgregarRegistro();
+    vector<Registro> VRegistros;
     vector<Campo> estructura;
     Registro registro;
     ofstream fileESCRIBIR;

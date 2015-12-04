@@ -19,7 +19,7 @@ Registro::Registro(){
 }
 
 string Registro::toString()const{
-    cout << "size de vector datos " << datos.size() << endl;
+   // cout << "size de vector datos " << datos.size() << endl;
     stringstream ss;
     for (int i=0; i<datos.size(); i++)
         ss<<datos.at(i)<<" ";
@@ -28,7 +28,7 @@ string Registro::toString()const{
 
 string Registro::inttoString(int num, bool edilson) const{
     stringstream ss;
-    if (edilson){//
+    if (!edilson){//
         if(num < 10){
             ss << "00" << num;
         } else if (num <100){
@@ -59,7 +59,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
     stringstream ss;
         //string valor; aqui pongo el string en datos.at(i)
         for (int i=0; i<datos.size(); i++){
-            cout<<" tipo: "<<estructura.at(i).getFieldtype()<<endl;
+           // cout<<" tipo: "<<estructura.at(i).getFieldtype()<<endl;
             if(estructura.at(i).getFieldtype() == 4 )//ID
                 ss<<inttoString(atoi(datos.at(i).c_str()), true);
             if (estructura.at(i).getFieldtype() == 1)//entero
@@ -114,7 +114,6 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
     }
 
     bool Registro::Leer(ifstream& archivo, vector<Campo> estructura){
-        cout<<"ENTRO A LEER"<<endl;
         string linea, sublinea;
         char str[100];
         int pos1=0, pos2;
@@ -137,7 +136,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
                     sublinea.erase(pos1, sublinea.size()-pos1);
                 }
                 pos1 = pos2+1;
-                cout << sublinea << endl;
+        //        cout << sublinea << endl;
                 agregarDato(sublinea);
             }
 
