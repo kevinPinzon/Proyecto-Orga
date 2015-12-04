@@ -13,7 +13,7 @@ using namespace std;
 
 class Campo {
 		char name[30];
-		int fieldtype;//0-texto 1-entero 2-decimal 
+		int fieldtype;//0-texto 1-entero 2-decimal 3-ID
 		int size;
 		int sizedecimal;
 		int keytype;//0- nada 1- llave primiaria 2- llave secundaria 

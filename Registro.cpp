@@ -20,8 +20,14 @@ using std::stringstream;
 Registro::Registro(){
 }
 
+Registro::Registro(vector<Campo> estructura){//constructor de un Registro cuando ya tenemos una estructura para mandarle
+	string dato = "0";
+	for (int i =0; i<estructura.size(); i++)
+		datos.push_back(dato);
+}
+
 string Registro::toString()const{
-	cout << "size de vector datos " << datos.size() << endl; 
+	//cout << "size de vector datos " << datos.size() << endl; 
 	stringstream ss; 
 	for (int i=0; i<datos.size(); i++)
 		ss<<datos.at(i)<<" ";
@@ -62,7 +68,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
 	//string valor; aqui pongo el string en datos.at(i)
 	for (int i=0; i<datos.size(); i++){
 		if (estructura.at(i).getFieldtype() == 0)//entero
-			ss<<inttoString(atoi(datos.at(i).c_str()), false);
+			ss<<inttoString(atoi(datos.at(i).c_str()), true);
 		if (estructura.at(i).getFieldtype() == 1){//texto
 			bool bandera = true;
 			int sizeTemp=estructura.at(i).getSize();
@@ -85,7 +91,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
 			parteEntero = numerodecimal.substr(0, pos1);
 			pos1++;
 			parteDecimal = numerodecimal.substr(pos1, numerodecimal.size()-pos1);
-			ss<< inttoString(atoi(parteEntero.c_str()), false);
+			ss<< inttoString(atoi(parteEntero.c_str()), true);
 			ss<<".";
 			for (int j=0; j < tamañodecimal; j++){
 				bool bandera = true;
@@ -98,6 +104,8 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
 				}
 			}
 		}
+		if (estructura.at(i).getFieldtype() == 3)//para cuando es de tipo ID
+			ss<<inttoString(atoi(datos.at(i).c_str()), false);
 		if (i < datos.size()-1){
 			ss << ",";
 		} else {
@@ -109,20 +117,24 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
 }
 
 void Registro::Escribir(ofstream& archivo, vector<Campo> estructura){
-	archivo << toStringArchivo (estructura);
+	string registry = toStringArchivo (estructura);
+	cout << "Se escribe un registro de tamaño = " << registry.size()  << endl;
+	cout << "Voy a escribir en offset " << archivo.tellp() << endl;
+	archivo << registry;
 }
 
 bool Registro::Leer(ifstream& archivo, vector<Campo> estructura){
 	string linea, sublinea;
 	char str[100];
 	int pos1=0, pos2;
+	cout << "Empezamos a leer desde offset " << archivo.tellg() << endl;
 	if (!archivo.getline(str, 100, '\t'))
-		return false;
+		return false; 
 	linea = str;
 	for (int i =0; i < estructura.size(); i++){
 		pos2 = linea.find(',', pos1);
 		sublinea = linea.substr(pos1, pos2-pos1);
-		if (estructura.at(i).getFieldtype() == 0 || estructura.at(i).getFieldtype() == 4){
+		if (estructura.at(i).getFieldtype() == 0 || estructura.at(i).getFieldtype() == 3){
 			//cout << "es de tipo entero o ID " << endl;
 			while (sublinea[0] == '0'){
 				//cout << sublinea.at(0) << endl;
@@ -154,3 +166,9 @@ void Registro::agregarDato(string datoN){
 void Registro::clear(){
 	datos.clear();
 }
+
+void Registro::setiarValor0(int cantCampos){
+	string dato = "0";
+	for (int i=0; i<cantCampos; i++)
+		agregarDato(dato);
+}//este metodo lo hice para que solo con la estructura pueda calcular la longitud fija que van a tener los registros ARLF

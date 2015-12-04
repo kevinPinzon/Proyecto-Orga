@@ -21,6 +21,7 @@ class Registro{
 	vector <string> datos;
 public:
 	Registro();
+	Registro(vector<Campo>);//este vector llena con datos insignificantes(-----,0000)
 	vector<string> getDatos();
 	string toString()const;
 	string inttoString(int, bool) const;
@@ -30,6 +31,6 @@ public:
 	void agregarDato(string);
 
 	void clear();
+	void setiarValor0(int);
 
-	/* data */
 };

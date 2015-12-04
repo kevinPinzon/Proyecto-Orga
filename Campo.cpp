@@ -26,9 +26,9 @@ Campo::Campo (const char* name, int fieldtype, int size, int sizedecimal, int ke
 }
 
 string Campo::toString()const{
-	stringstream ss; 
-	ss << "Name: " << name << "\tfieldtype: " << fieldtype << "\tsize: " << size << "\tsizedecimal: " << sizedecimal << "\tkeytype: " << keytype;
-	return ss.str();
+		stringstream ss; 
+		ss << "Name: " << name << "\tfieldtype: " << fieldtype << "\tsize: " << size << "\tsizedecimal: " << sizedecimal << "\tkeytype: " << keytype;
+		return ss.str();
 }
 
 string Campo::inttoString(int num, bool edilson) const{
@@ -86,7 +86,7 @@ istream& operator>>(istream& input, Campo& campo){
 	input.ignore();
 	cout << "char: Nombre de campo" << endl;
 	input.getline(campo.name, 30);
-	cout << "int: fieldtype donde 0- entero 2- textp 3- decimal" << endl;
+	cout << "int: fieldtype donde 0- entero 1- texto 2- decimal 3- ID" << endl;
 	input >> campo.fieldtype;
 	cout << "int: size para longitud de cadena de texto" << endl;
 	input >> campo.size;
