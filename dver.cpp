@@ -51,6 +51,21 @@ void Dver::llenarTabla(){
     }
     tabla->setColumnCount(estructura.size());
     tabla->setHorizontalHeaderLabels(encabezados);
+    cout<<"vamos bien1"<<endl;
+    int i;
+    if(fileLEER.is_open()){
+        while (registro.Leer(fileLEER, estructura)){
+                cout<<"vuelta: "<<i<<endl;
+                VRegistros.push_back(registro);
+                registro.clear();
+                i++;
+        }
+
+    }else
+        cerr<<"No se pudo abrir el archivo, para lectura de registros"<<endl;
+    cout<<"vamos bien2"<<endl;
+    actualizarRegistro();
+
 /*    registro.Leer(fileLEER,estructura);
     contRegistros=registro.getDatos().size();
     if(registro.getDatos().size()>10){
@@ -68,7 +83,7 @@ void Dver::llenarTabla(){
     }
     tabla->setRowCount(tabla->rowCount()+1);
 */
-    ui->tw_registros->setEnabled(false);
+
 }
 
 

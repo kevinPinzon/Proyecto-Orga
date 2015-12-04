@@ -19,10 +19,11 @@ public:
     explicit OperacionesCampos(QString,vector <Campo>,QWidget *parent = 0);
     ~OperacionesCampos();
     vector <Campo> estructura;
+    Campo field;
     QString path;
     void llenarComboBoxCampos();
     ofstream archivo;
-    int index=0;
+    int index=-1;
     bool llavePrimariaDisponible=false;
 private slots:
     void on_btn_modificarCampo_clicked();

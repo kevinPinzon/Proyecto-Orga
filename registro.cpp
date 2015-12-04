@@ -113,13 +113,49 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
         archivo << toStringArchivo (estructura);
     }
 
-    void Registro::Leer(ifstream& archivo, vector<Campo> estructura){
+    bool Registro::Leer(ifstream& archivo, vector<Campo> estructura){
+        cout<<"ENTRO A LEER"<<endl;
+        string linea, sublinea;
+        char str[100];
+        int pos1=0, pos2;
+        if(archivo.is_open()){
+            if (!archivo.getline(str, 100, '\t'))
+                return false;
+            linea = str;
+            for (int i =0; i < estructura.size(); i++){
+                pos2 = linea.find(',', pos1);
+                sublinea = linea.substr(pos1, pos2-pos1);
+                if (estructura.at(i).getFieldtype() == 1 || estructura.at(i).getFieldtype() == 4
+                        || estructura.at(i).getFieldtype() == 3 ){
+                    //cout << "es de tipo entero o ID " << endl;
+                    while (sublinea[0] == '0'){
+                        sublinea.erase(0,1);
+                    }
+                }
+                if (estructura.at(i).getFieldtype() == 2){
+                    pos1 = sublinea.find('-', 0);
+                    sublinea.erase(pos1, sublinea.size()-pos1);
+                }
+                pos1 = pos2+1;
+                cout << sublinea << endl;
+                agregarDato(sublinea);
+            }
 
-    }
+            return true;
+        }else{
+            cout<<"No se pudo abrir el archivo para lectura de registros en el clase registro"<<endl;
+            return false;
+        }
+}
+
+
     vector<string> Registro::getDatos(){
         return datos;
     }
 
     void Registro::agregarDato(string datoN){
         datos.push_back(datoN);
+    }
+    void Registro::clear(){
+        datos.clear();
     }
