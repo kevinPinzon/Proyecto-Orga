@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     registro.cpp \
     operacionescampos.cpp \
     agregarregistro.cpp \
-    modificarregistro.cpp
+    modificarregistro.cpp \
+    specialstack.cpp \
+    eliminarregistro.cpp
 
 HEADERS  += mainwindow.h \
     dnuevo.h \
@@ -29,11 +31,14 @@ HEADERS  += mainwindow.h \
     registro.h \
     operacionescampos.h \
     agregarregistro.h \
-    modificarregistro.h
+    modificarregistro.h \
+    specialstack.h \
+    eliminarregistro.h
 
 FORMS    += mainwindow.ui \
     dnuevo.ui \
     dver.ui \
     operacionescampos.ui \
     agregarregistro.ui \
-    modificarregistro.ui
+    modificarregistro.ui \
+    eliminarregistro.ui

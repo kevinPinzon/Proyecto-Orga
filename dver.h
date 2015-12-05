@@ -7,6 +7,7 @@
 #include <vector>
 #include"registro.h"
 #include <QTableWidget>
+#include"specialstack.h"
 
 using std::vector;
 
@@ -36,7 +37,10 @@ public:
     int row;
     int contRegistros;
     void actualizarRegistro();
-
+    int offsetRegistros, sizeRegistro;
+    SpecialStack availlist; //declaración de availlist
+    string toStringArchivoD1RD(int);
+    vector <Campo>cargarHeader(ifstream&);
 private slots:
     void on_pushButton_clicked();
     

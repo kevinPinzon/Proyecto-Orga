@@ -3,9 +3,11 @@
 #include "campo.h"
 #include"registro.h"
 #include<vector>
+#include"specialstack.h"
+#include <QDialog>
+
 using std::vector;
 
-#include <QDialog>
 
 namespace Ui {
 class AgregarRegistro;
@@ -16,17 +18,18 @@ class AgregarRegistro : public QDialog
     Q_OBJECT
 
 public:
-    explicit AgregarRegistro(QString path,vector<Campo>,vector<Registro>, QWidget *parent = 0);
+    explicit AgregarRegistro(SpecialStack, QString ,vector<Campo>,vector<Registro>, QWidget *parent = 0);
     ~AgregarRegistro();
     vector<Registro> VRegistros;
     vector<Campo> estructura;
     Registro registro;
     ofstream fileESCRIBIR;
+    ifstream fileLEER;
     QString path;
     void hacerTabla();
     Registro actualizarTabla();
     bool seAgrego=false;
-
+    SpecialStack availlist;
 private slots:
     void on_btn_agregarRegi_clicked();
 

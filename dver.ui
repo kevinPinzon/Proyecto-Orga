@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Lista de Registros</string>
   </property>
   <widget class="QTableWidget" name="tw_registros">
    <property name="geometry">

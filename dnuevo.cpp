@@ -46,7 +46,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         llave=2;
     //VALIDACIONES
     if(nombreCampo.empty()){
-        QMessageBox::information(this,"Error","Es necesario que escriba un nombre para el campo");
+        QMessageBox::warning(this,"Error","Es necesario que escriba un nombre para el campo");
     }else{
 
         if(estructura.empty())
@@ -64,7 +64,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
             if(llavePrimariaDisponible)
                 primeraValidacion=true;
             if(!llavePrimariaDisponible){
-                QMessageBox::information(this,"Error"," Ya existe un campo que es llave primaria");
+                QMessageBox::warning(this,"Error"," Ya existe un campo que es llave primaria");
 
             }
             if(primeraValidacion)
@@ -87,7 +87,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         }else{
             stringstream ss;
             ss<<"   Ya existe un campo con el nombre: "<<nombreCampo;
-            QMessageBox::information(this,"Error",ss.str().c_str());
+            QMessageBox::warning(this,"Error",ss.str().c_str());
         }
 
         ui->txt_nameCampo->setText(NULL);
@@ -96,21 +96,23 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
 }
 
 void Dnuevo::on_btn_nuevoArchivo_clicked(){
+    availlist.push(-100000);
     string nombreArchivo=ui->txt_nameArchivo->text().toStdString();
     stringstream nameA;
     nameA<<nombreArchivo<<".dat";
     ofstream archivo;
     Campo field;
     if(nombreArchivo.empty()){
-        QMessageBox::information(this,"Error","Es necesario que escriba un nombre para el archivo");
+        QMessageBox::warning(this,"Error","Es necesario que escriba un nombre para el archivo");
     }else{
         if(!estructura.empty()){
             if(!llavePrimariaDisponible){
                 archivo.open(nameA.str().c_str(), ios::in | ios::out | ios::trunc);
                 cantidadCampos=estructura.size();
-                archivo<<cantidadCampos;
-                archivo<<",";
-                //escribir availlist
+                if(cantidadCampos>9)
+                    archivo << cantidadCampos << ',' << availlist.top() << ';';
+                else
+                    archivo << 0<<cantidadCampos << ',' << availlist.top() << ';';
                 for (int i = 0; i < estructura.size(); ++i){
                         field = estructura.at(i);
                        // cout << field.toString() << endl;
@@ -120,9 +122,9 @@ void Dnuevo::on_btn_nuevoArchivo_clicked(){
                 archivo.close();
                 this->close();
             }else
-            QMessageBox::information(this,"Error","Necesita crear un campo que sea llave primaria");
+            QMessageBox::warning(this,"Error","Necesita crear un campo que sea llave primaria");
         }else{
-            QMessageBox::information(this,"Error","Necesita crear al menos un campo");
+            QMessageBox::warning(this,"Error","Necesita crear al menos un campo");
         }
 
 

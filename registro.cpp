@@ -99,6 +99,7 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
                     }
                 }
             }
+
             if (i < datos.size()-1){
                 ss << ",";
             } else {
@@ -109,11 +110,37 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
 }
 
     void Registro::Escribir(ofstream& archivo, vector<Campo> estructura){
-      cout<<" to string en archivo: "<<toStringArchivo(estructura)<<endl;
+        cout<<" to string en archivo: "<<toStringArchivo(estructura)<<endl;
         archivo << toStringArchivo (estructura);
     }
 
-    bool Registro::Leer(ifstream& archivo, vector<Campo> estructura){
+    int Registro::Escribir(ifstream& fileLEER,ofstream& fileESCRIBIR, vector<Campo> estructura,int offset){
+        //Este metodo se llama cuando se desea agregar un registro y existe un valor en el availList.
+        //se envia un ifstream debido que se tiene que tomar el RRN que tiene el registro donde se escribira
+        //ese valor se calcula y se retorna.
+        //el offset que resive es para situar el seek de escritura donde empieza el registro donde se escribira
+
+        //recuperamos el RRN del registro que se sobreescribira
+        string linea;
+        char str[7];
+        fileLEER.seekg(offset);
+        fileLEER.getline(str, 7, ';');
+        linea = str;
+        linea.erase(0,1);
+        cout << "NUEVO RRN AL HEADER(cadena) " << linea << endl;
+        int siguienteRRN=atoi(linea.c_str());
+        cout << "NUEVO RRN AL HEADER(en entero) " << siguienteRRN << endl;
+
+        //colocamos el seek de escritura en el offset donde comienza el ultimo registro borrado.
+        fileESCRIBIR.seekp(offset);
+        cout<<" to string en archivo: "<<toStringArchivo(estructura)<<endl;
+
+        fileESCRIBIR << toStringArchivo (estructura);
+        return siguienteRRN;
+    }
+
+    bool Registro::Leer(ifstream& archivo, vector<Campo> estructura,int cantidadCampos){
+        cout<<"dentro de leer"<<endl;
         string linea, sublinea;
         char str[100];
         int pos1=0, pos2;
@@ -121,32 +148,35 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
             if (!archivo.getline(str, 100, '\t'))
                 return false;
             linea = str;
-            for (int i =0; i < estructura.size(); i++){
-                pos2 = linea.find(',', pos1);
-                sublinea = linea.substr(pos1, pos2-pos1);
-                if (estructura.at(i).getFieldtype() == 1 || estructura.at(i).getFieldtype() == 4
-                        || estructura.at(i).getFieldtype() == 3 ){
-                    //cout << "es de tipo entero o ID " << endl;
-                    while (sublinea[0] == '0'){
-                        sublinea.erase(0,1);
+            cout<<"LINEAAAAAAAAAAAAAAA: "<<linea<<endl;
+            if(str[0]=='*'){
+                cout<<"registro borrado"<<endl;
+            }else{
+                for (int i =0; i < estructura.size(); i++){
+                    pos2 = linea.find(',', pos1);
+                    sublinea = linea.substr(pos1, pos2-pos1);
+                    if (estructura.at(i).getFieldtype() == 1 || estructura.at(i).getFieldtype() == 4
+                            || estructura.at(i).getFieldtype() == 3 ){
+                        //cout << "es de tipo entero o ID " << endl;
+                        while (sublinea[0] == '0'){
+                            sublinea.erase(0,1);
+                        }
                     }
+                    if (estructura.at(i).getFieldtype() == 2){
+                        pos1 = sublinea.find('-', 0);
+                        sublinea.erase(pos1, sublinea.size()-pos1);
+                    }
+                    pos1 = pos2+1;
+                    cout << sublinea << endl;
                 }
-                if (estructura.at(i).getFieldtype() == 2){
-                    pos1 = sublinea.find('-', 0);
-                    sublinea.erase(pos1, sublinea.size()-pos1);
-                }
-                pos1 = pos2+1;
-        //        cout << sublinea << endl;
                 agregarDato(sublinea);
             }
-
             return true;
         }else{
-            cout<<"No se pudo abrir el archivo para lectura de registros en el clase registro"<<endl;
+            cerr<<"No se pudo abrir el archivo para lectura de registros en el clase registro"<<endl;
             return false;
         }
-}
-
+    }
 
     vector<string> Registro::getDatos(){
         return datos;
@@ -158,3 +188,9 @@ string Registro::toStringArchivo(vector<Campo> estructura)const{
     void Registro::clear(){
         datos.clear();
     }
+
+    void Registro::setiarValor0(int cantCampos){
+        string dato = "0";
+        for (int i=0; i<cantCampos; i++)
+            agregarDato(dato);
+    }//este metodo lo hice para que solo con la estructura pueda calcular la longitud fija que van a tener los registros ARLF

@@ -4,14 +4,16 @@
 #include <QDialog>
 #include <vector>
 #include "campo.h"
+#include <stack>
 
 namespace Ui {
-using std::vector;
-class Dnuevo;
+    using std::vector;
+    using std::stack;
+
+    class Dnuevo;
 }
 
-class Dnuevo : public QDialog
-{
+class Dnuevo : public QDialog{
     Q_OBJECT
 
 public:
@@ -20,6 +22,8 @@ public:
      vector<Campo> estructura;
     bool llavePrimariaDisponible=true;
     int cantidadCampos;
+    stack <int> availlist;//declaración del availlist
+
 private slots:
     void on_btn_agregarCampo_clicked();
 
