@@ -116,7 +116,7 @@ int main (int argc, char* argv[]){
 						if (!availlist.isEmpty()){
 							int sigPosDisp = availlist.peek();//tomo la siguiente posicióndisponible del availist
 							string alBorrado = toStringArchivoD1RD(sigPosDisp);//hago la cadena que va a marcar al registro borrado
-							int posArchivo = pos+availlist.posicionesAntesDe(pos);
+							int posArchivo = pos+availlist.posicionesAntesDe(sigPosDisp);
 							//int offsetBorrar = offsetRegistros+(sizeRegistro*(pos+availlist.posicionesAntesDe(pos)));
 							archivo.seekp(offsetRegistros+(sizeRegistro*posArchivo));
 							archivo << alBorrado;//ya marqué el registro borrado
