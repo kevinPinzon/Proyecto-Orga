@@ -32,5 +32,6 @@ public:
 
 	void clear();
 	void setiarValor0(int);
+	bool esValido();
 
 };

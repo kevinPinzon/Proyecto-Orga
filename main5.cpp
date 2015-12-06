@@ -13,10 +13,14 @@ PERO EN FORMATO AVAILST
 #include <fstream>
 #include <vector>
 #include <stack>
+#include "SpecialStack.h"
 
 using std::string;
 using std::vector;
 using namespace std;
+
+string cantDeCamposArchivo (int);
+string headAvaillistArchivo (int);
 
 int main (int argc, char* argv[]){
 	char str[80];
@@ -59,11 +63,13 @@ int main (int argc, char* argv[]){
 	ofstream archivo;
 	archivo.open("memestest2.txt", ios::in | ios::out | ios::trunc);
 
-	stack <int> availlist;//declaración del availlist
-	availlist.push(-1);
+	//stack <int> availlist;//declaración del availlist
+	//availlist.push(-1);
+
+	SpecialStack availlist(-1);
 
 	if (archivo.is_open()){
-		archivo << cantDeCampos << ',' << availlist.top() << ';';
+		archivo << cantDeCamposArchivo(cantDeCampos) << ',' << headAvaillistArchivo(availlist.peek()) << ';';
 		for (int i = 0; i < cantDeCampos; ++i)
 			archivo << estructura.at(i);
 		for (int i = 0; i < registros.size(); i++)
@@ -76,3 +82,32 @@ int main (int argc, char* argv[]){
 
 	return 0;
 }
+
+string cantDeCamposArchivo (int valor){
+	stringstream ss;
+	if (valor < 10)
+		ss << "00" << valor;
+	else
+		ss << "0" << valor;
+	return ss.str();
+}// fin al metodo que devuelve el string con la cantdad de campos para el header 
+
+string headAvaillistArchivo (int valor){
+	stringstream ss; 
+	if (valor < 0){
+		ss <<"0000-1";
+	}else if(valor < 10){
+		ss << "00000" << valor;
+	} else if (valor <100){
+		ss<<"0000"<<valor;
+	} else if (valor < 1000){
+		ss<<"000"<<valor;
+	} else if (valor < 10000){
+		ss<<"00"<<valor;
+	} else if (valor < 100000){
+		ss<<"0"<<valor;
+	} else {
+		ss<<valor;
+	}
+	return ss.str();
+}//fin al metodo que devuelve la cadena del head del availlist para escribirla en le header

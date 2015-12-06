@@ -32,10 +32,11 @@ class SpecialStack{
 		int peek();
 		int posicionesAntesDe(int);
 		bool isEmpty();
-		void inicializar(ifstream&, int, int, int);
+		void inicializar(ifstream&, int, int);
 		/*parametros de inicializar	: 
 		ifstream& file, int pos(que toma del header), int offsetRegistros, int sizeRegistro(es el tamaño del registro fijo ARLF) 
 		*/
 		int siguientePosicionDisponible(string);
+		int cadena2Int(string);
 
 };// fin clase SpecialStack

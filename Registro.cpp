@@ -172,3 +172,19 @@ void Registro::setiarValor0(int cantCampos){
 	for (int i=0; i<cantCampos; i++)
 		agregarDato(dato);
 }//este metodo lo hice para que solo con la estructura pueda calcular la longitud fija que van a tener los registros ARLF
+
+bool Registro::esValido(){
+	/*
+	este metodo revisa un registro recien levantado y si esta marcado indica que el registro no  
+	debería de ser incorporado a al vector donde se guardan el resto de registros validos 
+	*/
+	bool entonces = true;
+	if(!datos.empty()){
+		string str = datos.at(0);
+		if (str.at(0) == '*')
+			entonces = false;
+	} else {
+		cerr << "ERROR: El vector de datos en el registro actual esta vacío." << endl;
+	}
+	return entonces;
+}
