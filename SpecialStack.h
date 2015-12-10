@@ -12,11 +12,13 @@ los registros cuando el usuario escoje uno.
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "ListaOrdenada.h"
 
 using namespace std; 
 
 class SpecialStack{
 		vector <int> availlist;
+		ListaOrdenada VIPList;
 		/*
 		todas las posiciones que metemos al availlist son en base a i del vector
 		osea que empiezan desde 0, y llegan hasta size -1
@@ -27,10 +29,10 @@ class SpecialStack{
 		SpecialStack(int);
 
 		string toString();
-		int pop();
-		void push(int);
+		int pop();//SE MODIFICÓ EL CODIGO DE ESTE METODO AL INCORPORAR LA LISTAORDENADA
+		void push(int);//SE MODIFICÓ EL CODIGO DE ESTE METODO AL INCORPORAR LA LISTAORDENADA
 		int peek();
-		int posicionesAntesDe(int);
+		int posicionArchivo(int);//CAMBIO DE NOMBRE Y SE MODIFICÓ EL CODIGO DE ESTE METODO AL INCORPORAR LA LISTAORDENADA
 		bool isEmpty();
 		void inicializar(ifstream&, int, int);
 		/*parametros de inicializar	: 
@@ -38,5 +40,6 @@ class SpecialStack{
 		*/
 		int siguientePosicionDisponible(string);
 		int cadena2Int(string);
+		int buscarVIP(int);
 
 };// fin clase SpecialStack

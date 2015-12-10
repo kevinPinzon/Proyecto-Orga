@@ -127,7 +127,7 @@ bool Registro::Leer(ifstream& archivo, vector<Campo> estructura){
 	string linea, sublinea;
 	char str[100];
 	int pos1=0, pos2;
-	cout << "Empezamos a leer desde offset " << archivo.tellg() << endl;
+	//cout << "Empezamos a leer desde offset " << archivo.tellg() << endl;
 	if (!archivo.getline(str, 100, '\t'))
 		return false; 
 	linea = str;
