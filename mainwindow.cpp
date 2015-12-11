@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QFile>
+#include "dver.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,7 +24,7 @@ void MainWindow::on_pushButton_clicked(){
 
 void MainWindow::on_pushButton_2_clicked(){
     try {
-        QString path(QFileDialog::getOpenFileName(this,tr("Abrir Archivo"), "./", tr("DAT Files (*.dat)")));
+        QString path(QFileDialog::getOpenFileName(this,tr("Abrir Archivo De Registro"), "./", tr("DAT Files (*.dat)")));
         QFile archivo(path);
         if (!archivo.exists()){
             return;
@@ -31,9 +32,11 @@ void MainWindow::on_pushButton_2_clicked(){
         if (archivo.isOpen()) {
             archivo.close();
         }
-   //     DialogVer dialog(path,this);
-     //   dialog.exec();
+    Dver a(path,this);
+    a.exec();
+
     } catch (...) {
+
     }
 
 }

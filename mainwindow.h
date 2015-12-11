@@ -25,3 +25,4 @@ private:
 };
 
 #endif // MAINWINDOW_H
+//error al borrar todos los registros y empesar a agregar, se agrega solo en la ultima pos, no se va actualizando el header con el rrn borrado.

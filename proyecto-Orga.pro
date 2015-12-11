@@ -14,10 +14,36 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    dnuevo.cpp
+    dnuevo.cpp \
+    campo.cpp \
+    dver.cpp \
+    registro.cpp \
+    operacionescampos.cpp \
+    agregarregistro.cpp \
+    modificarregistro.cpp \
+    specialstack.cpp \
+    eliminarregistro.cpp \
+    cruzar.cpp \
+    listaordenada.cpp
 
 HEADERS  += mainwindow.h \
-    dnuevo.h
+    dnuevo.h \
+    campo.h \
+    dver.h \
+    registro.h \
+    operacionescampos.h \
+    agregarregistro.h \
+    modificarregistro.h \
+    specialstack.h \
+    eliminarregistro.h \
+    cruzar.h \
+    listaordenada.h
 
 FORMS    += mainwindow.ui \
-    dnuevo.ui
+    dnuevo.ui \
+    dver.ui \
+    operacionescampos.ui \
+    agregarregistro.ui \
+    modificarregistro.ui \
+    eliminarregistro.ui \
+    cruzar.ui

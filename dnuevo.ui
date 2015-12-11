@@ -6,17 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>393</width>
-    <height>328</height>
+    <width>490</width>
+    <height>382</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Nuevo Archivo de Registro</string>
   </property>
   <widget class="QRadioButton" name="rb_int">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>149</x>
      <y>130</y>
      <width>51</width>
      <height>22</height>
@@ -25,11 +25,14 @@
    <property name="text">
     <string>Int</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
   </widget>
   <widget class="QRadioButton" name="rb_char">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>229</x>
      <y>130</y>
      <width>71</width>
      <height>22</height>
@@ -38,25 +41,28 @@
    <property name="text">
     <string>Char</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
   </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>120</y>
-     <width>41</width>
+     <y>124</y>
+     <width>111</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Tipo</string>
+    <string>Tipo de campo</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_nuevoArchivo">
    <property name="geometry">
     <rect>
-     <x>38</x>
-     <y>270</y>
+     <x>70</x>
+     <y>300</y>
      <width>321</width>
      <height>51</height>
     </rect>
@@ -68,7 +74,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>200</x>
      <y>0</y>
      <width>111</width>
      <height>31</height>
@@ -81,8 +87,8 @@
   <widget class="QPushButton" name="btn_agregarCampo">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>230</y>
+     <x>52</x>
+     <y>260</y>
      <width>361</width>
      <height>31</height>
     </rect>
@@ -95,7 +101,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>160</y>
+     <y>190</y>
      <width>141</width>
      <height>31</height>
     </rect>
@@ -115,19 +121,6 @@
    </property>
    <property name="text">
     <string>Nombre del campo</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="cbx_llave">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>200</y>
-     <width>121</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Campo llave</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -157,7 +150,7 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>160</y>
+     <y>190</y>
      <width>48</width>
      <height>27</height>
     </rect>
@@ -176,7 +169,126 @@
     </rect>
    </property>
   </widget>
+  <widget class="QRadioButton" name="rb_primaria">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>220</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>LLave primaria</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">tipoLLave</string>
+   </attribute>
+  </widget>
+  <widget class="QRadioButton" name="rd_secundaria">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>220</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>LLave secundaria</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">tipoLLave</string>
+   </attribute>
+  </widget>
+  <widget class="QRadioButton" name="rb_decimal">
+   <property name="geometry">
+    <rect>
+     <x>319</x>
+     <y>130</y>
+     <width>91</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Decimal</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
+  </widget>
+  <widget class="QSpinBox" name="sp_decimales">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>160</y>
+     <width>48</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>0</number>
+   </property>
+   <property name="maximum">
+    <number>5</number>
+   </property>
+   <property name="singleStep">
+    <number>1</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Decimales</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rb_ID">
+   <property name="geometry">
+    <rect>
+     <x>419</x>
+     <y>130</y>
+     <width>117</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ID</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">fileType</string>
+   </attribute>
+  </widget>
+  <widget class="QRadioButton" name="rb_noEsLLave">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>224</y>
+     <width>117</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>No es llave</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">tipoLLave</string>
+   </attribute>
+  </widget>
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="fileType"/>
+  <buttongroup name="tipoLLave"/>
+ </buttongroups>
 </ui>
