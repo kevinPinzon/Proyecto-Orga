@@ -19,7 +19,16 @@ SOURCES += main.cpp\
     dver.cpp \
     registro.cpp \
     operacionescampos.cpp \
+<<<<<<< HEAD
     agregarregistro.cpp
+=======
+    agregarregistro.cpp \
+    modificarregistro.cpp \
+    specialstack.cpp \
+    eliminarregistro.cpp \
+    cruzar.cpp \
+    listaordenada.cpp
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 
 HEADERS  += mainwindow.h \
     dnuevo.h \
@@ -27,10 +36,26 @@ HEADERS  += mainwindow.h \
     dver.h \
     registro.h \
     operacionescampos.h \
+<<<<<<< HEAD
     agregarregistro.h
+=======
+    agregarregistro.h \
+    modificarregistro.h \
+    specialstack.h \
+    eliminarregistro.h \
+    cruzar.h \
+    listaordenada.h
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 
 FORMS    += mainwindow.ui \
     dnuevo.ui \
     dver.ui \
     operacionescampos.ui \
+<<<<<<< HEAD
     agregarregistro.ui
+=======
+    agregarregistro.ui \
+    modificarregistro.ui \
+    eliminarregistro.ui \
+    cruzar.ui
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8

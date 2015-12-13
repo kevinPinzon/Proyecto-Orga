@@ -46,7 +46,11 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         llave=2;
     //VALIDACIONES
     if(nombreCampo.empty()){
+<<<<<<< HEAD
         QMessageBox::information(this,"Error","Es necesario que escriba un nombre para el campo");
+=======
+        QMessageBox::warning(this,"Error","Es necesario que escriba un nombre para el campo");
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     }else{
 
         if(estructura.empty())
@@ -64,7 +68,11 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
             if(llavePrimariaDisponible)
                 primeraValidacion=true;
             if(!llavePrimariaDisponible){
+<<<<<<< HEAD
                 QMessageBox::information(this,"Error"," Ya existe un campo que es llave primaria");
+=======
+                QMessageBox::warning(this,"Error"," Ya existe un campo que es llave primaria");
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 
             }
             if(primeraValidacion)
@@ -87,7 +95,11 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         }else{
             stringstream ss;
             ss<<"   Ya existe un campo con el nombre: "<<nombreCampo;
+<<<<<<< HEAD
             QMessageBox::information(this,"Error",ss.str().c_str());
+=======
+            QMessageBox::warning(this,"Error",ss.str().c_str());
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
         }
 
         ui->txt_nameCampo->setText(NULL);
@@ -96,32 +108,56 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
 }
 
 void Dnuevo::on_btn_nuevoArchivo_clicked(){
+<<<<<<< HEAD
+=======
+    availlist.push(-1);
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     string nombreArchivo=ui->txt_nameArchivo->text().toStdString();
     stringstream nameA;
     nameA<<nombreArchivo<<".dat";
     ofstream archivo;
     Campo field;
     if(nombreArchivo.empty()){
+<<<<<<< HEAD
         QMessageBox::information(this,"Error","Es necesario que escriba un nombre para el archivo");
+=======
+        QMessageBox::warning(this,"Error","Es necesario que escriba un nombre para el archivo");
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     }else{
         if(!estructura.empty()){
             if(!llavePrimariaDisponible){
                 archivo.open(nameA.str().c_str(), ios::in | ios::out | ios::trunc);
                 cantidadCampos=estructura.size();
+<<<<<<< HEAD
                 archivo<<cantidadCampos;
                 archivo<<",";
                 for (int i = 0; i < estructura.size(); ++i){
                         field = estructura.at(i);
                        // cout << field.toString() << endl;
                         archivo << field;
+=======
+                cout<<"antes de escribir cantidad de campos"<<endl;
+                if(cantidadCampos<10){
+                    archivo << "00"<<cantidadCampos << ',' << availlist.headAvaillistArchivo(availlist.peek()) << ';';
+                }else{
+                    archivo << "0"<<cantidadCampos << ',' << availlist.headAvaillistArchivo(availlist.peek()) << ';';
+                }for (int i = 0; i < estructura.size(); ++i){
+                        archivo << estructura.at(i);
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
                     }
                 llavePrimariaDisponible=true;
                 archivo.close();
                 this->close();
             }else
+<<<<<<< HEAD
             QMessageBox::information(this,"Error","Necesita crear un campo que sea llave primaria");
         }else{
             QMessageBox::information(this,"Error","Necesita crear al menos un campo");
+=======
+            QMessageBox::warning(this,"Error","Necesita crear un campo que sea llave primaria");
+        }else{
+            QMessageBox::warning(this,"Error","Necesita crear al menos un campo");
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
         }
 
 

@@ -6,19 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>451</width>
     <height>223</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+=======
+    <width>561</width>
+    <height>182</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Agregar Registro</string>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
   </property>
   <widget class="QPushButton" name="btn_agregarRegi">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>18</x>
      <y>120</y>
      <width>411</width>
+=======
+     <x>9</x>
+     <y>113</y>
+     <width>420</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <height>60</height>
     </rect>
    </property>
@@ -29,9 +44,15 @@
   <widget class="QTableWidget" name="tw_registroAdd">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>20</x>
      <y>20</y>
      <width>411</width>
+=======
+     <x>10</x>
+     <y>13</y>
+     <width>540</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <height>91</height>
     </rect>
    </property>
@@ -39,10 +60,17 @@
   <widget class="QPushButton" name="btn_cerrar">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>310</x>
      <y>190</y>
      <width>120</width>
      <height>30</height>
+=======
+     <x>440</x>
+     <y>112</y>
+     <width>110</width>
+     <height>60</height>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     </rect>
    </property>
    <property name="text">

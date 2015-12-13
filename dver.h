@@ -7,6 +7,10 @@
 #include <vector>
 #include"registro.h"
 #include <QTableWidget>
+<<<<<<< HEAD
+=======
+#include"specialstack.h"
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 
 using std::vector;
 
@@ -23,7 +27,10 @@ public:
     ~Dver();
     void leerHeader();
     char str[80];
+<<<<<<< HEAD
     Campo field;
+=======
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     int cantDeCampos;
     vector <Campo> estructura;
     vector <Registro> VRegistros;
@@ -36,7 +43,14 @@ public:
     int row;
     int contRegistros;
     void actualizarRegistro();
+<<<<<<< HEAD
 
+=======
+    int offsetRegistros, sizeRegistro;
+    SpecialStack availlist; //declaración de availlist
+    string toStringArchivoD1RD(int);
+    vector <Campo>cargarHeader(ifstream&);
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 private slots:
     void on_pushButton_clicked();
     
@@ -52,6 +66,13 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+<<<<<<< HEAD
+=======
+    void on_btn_cruzar_clicked();
+
+    void on_btn_operacionesCampos_clicked();
+
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 private:
     Ui::Dver *ui;
 };

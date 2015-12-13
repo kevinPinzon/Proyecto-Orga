@@ -2,16 +2,29 @@
 #define DNUEVO_H
 
 #include <QDialog>
+<<<<<<< HEAD
 #include <vector>
 #include "campo.h"
 
 namespace Ui {
 using std::vector;
 class Dnuevo;
+=======
+#include <QFile>
+#include <vector>
+#include "campo.h"
+#include <stack>
+#include"specialstack.h"
+
+namespace Ui {
+    using std::vector;
+    using std::stack;
+
+    class Dnuevo;
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 }
 
-class Dnuevo : public QDialog
-{
+class Dnuevo : public QDialog{
     Q_OBJECT
 
 public:
@@ -19,7 +32,13 @@ public:
     ~Dnuevo();
      vector<Campo> estructura;
     bool llavePrimariaDisponible=true;
+<<<<<<< HEAD
     int cantidadCampos;
+=======
+    int cantidadCampos=0;
+    SpecialStack availlist;//declaración del availlist
+
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 private slots:
     void on_btn_agregarCampo_clicked();
 
