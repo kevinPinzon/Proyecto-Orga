@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>507</width>
     <height>217</height>
+=======
+    <width>550</width>
+    <height>179</height>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +21,7 @@
   <widget class="QPushButton" name="btn_cerrar">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>380</x>
      <y>182</y>
      <width>120</width>
@@ -24,14 +30,30 @@
    </property>
    <property name="text">
     <string>Cerrar</string>
+=======
+     <x>430</x>
+     <y>110</y>
+     <width>110</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancelar</string>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
    </property>
   </widget>
   <widget class="QPushButton" name="btn_modifRegistro">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>11</x>
      <y>112</y>
      <width>480</width>
+=======
+     <x>9</x>
+     <y>110</y>
+     <width>410</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <height>60</height>
     </rect>
    </property>
@@ -42,9 +64,15 @@
   <widget class="QTableWidget" name="tw_registroMod">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>9</x>
      <y>12</y>
      <width>490</width>
+=======
+     <x>10</x>
+     <y>12</y>
+     <width>530</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <height>91</height>
     </rect>
    </property>

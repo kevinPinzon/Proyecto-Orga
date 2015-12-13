@@ -96,7 +96,11 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
 }
 
 void Dnuevo::on_btn_nuevoArchivo_clicked(){
+<<<<<<< HEAD
     availlist.push(-100000);
+=======
+    availlist.push(-1);
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     string nombreArchivo=ui->txt_nameArchivo->text().toStdString();
     stringstream nameA;
     nameA<<nombreArchivo<<".dat";
@@ -109,6 +113,7 @@ void Dnuevo::on_btn_nuevoArchivo_clicked(){
             if(!llavePrimariaDisponible){
                 archivo.open(nameA.str().c_str(), ios::in | ios::out | ios::trunc);
                 cantidadCampos=estructura.size();
+<<<<<<< HEAD
                 if(cantidadCampos>9)
                     archivo << cantidadCampos << ',' << availlist.top() << ';';
                 else
@@ -117,6 +122,15 @@ void Dnuevo::on_btn_nuevoArchivo_clicked(){
                         field = estructura.at(i);
                        // cout << field.toString() << endl;
                         archivo << field;
+=======
+                cout<<"antes de escribir cantidad de campos"<<endl;
+                if(cantidadCampos<10){
+                    archivo << "00"<<cantidadCampos << ',' << availlist.headAvaillistArchivo(availlist.peek()) << ';';
+                }else{
+                    archivo << "0"<<cantidadCampos << ',' << availlist.headAvaillistArchivo(availlist.peek()) << ';';
+                }for (int i = 0; i < estructura.size(); ++i){
+                        archivo << estructura.at(i);
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
                     }
                 llavePrimariaDisponible=true;
                 archivo.close();

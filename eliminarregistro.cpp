@@ -23,8 +23,14 @@ eliminarRegistro::eliminarRegistro(SpecialStack availlist,vector<Campo> estructu
     this->estructura=estructura;
     this->VRegistros=VRegistros;
     this->path=path;
+<<<<<<< HEAD
     ui->sp_elimRecord->setMinimum(1);
     ui->sp_elimRecord->setMaximum(VRegistros.size()+1);
+=======
+    fileESCRIBIR.open(path.toStdString().c_str(), ios::in | ios::out);
+    ui->sp_elimRecord->setMinimum(0);
+    ui->sp_elimRecord->setMaximum(VRegistros.size());
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     hacerTabla();
 }
 
@@ -32,11 +38,20 @@ eliminarRegistro::~eliminarRegistro(){
     delete ui;
 }
 
+<<<<<<< HEAD
 void eliminarRegistro::on_btn_visualizar_clicked(){
     RRNaBorrar=ui->sp_elimRecord->value();
     RRNaBorrar--;//le bajo uno para que ya este en termino de i que usamos para los fors donde i=0
     if (!(RRNaBorrar < 0 || RRNaBorrar >= VRegistros.size())){	//validado que la pos 1 - registros.zise()
         if (!availlist.isEmpty() || availlist.peek()==-100000){
+=======
+void eliminarRegistro::on_btn_visualizar_clicked(){//muestra el registro
+    RRNaBorrar=ui->sp_elimRecord->value();
+    cout<<RRNaBorrar<<" ESTE ES EL RRN SIN RESTAR"<<endl;
+    RRNaBorrar--;//le bajo uno para que ya este en termino de i que usamos para los fors donde i=0
+    if (!(RRNaBorrar < 0 || RRNaBorrar >= VRegistros.size())){	//validado que la pos 1 - registros.zise()
+        if (!availlist.isEmpty()){
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
             ui->tw_registroElim->setRowCount(ui->tw_registroElim->rowCount());
             Registro registroTemp;
             string cadenaTemp;
@@ -48,7 +63,11 @@ void eliminarRegistro::on_btn_visualizar_clicked(){
                 ui->tw_registroElim->setItem(0,columnas,new QTableWidgetItem(cadenaTemp.data()));
             }
             ui->tw_registroElim->setEnabled(false);
+<<<<<<< HEAD
         } else//else para cuando esta vacío el availist que no deberia de estar porque deberia de estar -1
+=======
+      } else//else para cuando esta vacío el availist que no deberia de estar porque deberia de estar -1
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
             cout << "EL AVAILLIST ESTA COMPLETAMENTE VACIO" << endl;
     }else
         QMessageBox::critical(this,"ERROR","    La posicionque ha ingresado es invalida ");
@@ -67,6 +86,7 @@ string eliminarRegistro::toStringArchivoD1RD(int posicion){//devuelve la cadena 
 void eliminarRegistro::on_btn_borrarRecord_clicked(){
     int sigPosDisp = availlist.peek();
     string alBorrado = toStringArchivoD1RD(sigPosDisp);
+<<<<<<< HEAD
     if (fileESCRIBIR.is_open()){
         fileESCRIBIR.clear();
         fileESCRIBIR.seekp(availlist.getOffsetRegistro()+
@@ -91,6 +111,24 @@ void eliminarRegistro::on_btn_borrarRecord_clicked(){
         }else
             QMessageBox::warning(this,"ERROR","       No se ha podido abrir el archivo para escritura  ");
     }
+=======
+    int posArchivo = availlist.posicionArchivo(RRNaBorrar);
+
+    if (fileESCRIBIR.is_open()){
+        fileESCRIBIR.clear();
+        fileESCRIBIR.seekp(availlist.getOffsetRegistro()+(availlist.getSizeRegistro()*(posArchivo)));
+        fileESCRIBIR<<alBorrado;
+        cout<<"availlist peek primero es: "<<availlist.peek()<<endl;
+        availlist.push(posArchivo);
+        cout<<"availlist peek ahora es: "<<availlist.peek()<<endl;
+        cout<<"rrnaBorrar es: "<<RRNaBorrar<<endl;
+        fileESCRIBIR.seekp(4);
+        cout<<"headavaillistarchivo, va a mandar a fileEscribir: "<<availlist.headAvaillistArchivo(posArchivo)<<endl;
+        fileESCRIBIR << availlist.headAvaillistArchivo(posArchivo);
+        VRegistros.erase(VRegistros.begin()+RRNaBorrar);//borra el registro del vector en memoria
+    }else
+        QMessageBox::warning(this,"ERROR","       No se ha podido abrir el archivo para escritura en borrarRegistro  ");
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     this->close();
 }
 
@@ -121,3 +159,10 @@ void eliminarRegistro::hacerTabla(){
 void eliminarRegistro::on_btn_cancelar_clicked(){
     this->close();
 }
+<<<<<<< HEAD
+=======
+
+SpecialStack eliminarRegistro::actualizarAvaillist(){
+    return availlist;
+}
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8

@@ -27,7 +27,11 @@ public:
     ifstream fileLEER;
     QString path;
     void hacerTabla();
+<<<<<<< HEAD
     Registro actualizarTabla();
+=======
+    vector<Registro> actualizarRegistro();
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     bool seAgrego=false;
     SpecialStack availlist;
 private slots:

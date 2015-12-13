@@ -6,7 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>557</width>
+=======
+    <width>593</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     <height>588</height>
    </rect>
   </property>
@@ -18,7 +22,11 @@
     <rect>
      <x>10</x>
      <y>163</y>
+<<<<<<< HEAD
      <width>531</width>
+=======
+     <width>570</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <height>371</height>
     </rect>
    </property>
@@ -26,9 +34,15 @@
   <widget class="QPushButton" name="btn_agregarRegistro">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>50</x>
      <y>16</y>
      <width>461</width>
+=======
+     <x>10</x>
+     <y>16</y>
+     <width>570</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <height>41</height>
     </rect>
    </property>
@@ -46,16 +60,27 @@
     </rect>
    </property>
    <property name="text">
+<<<<<<< HEAD
     <string>Ver ma Registros</string>
+=======
+    <string>Ver mas Registros</string>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>450</x>
      <y>550</y>
      <width>99</width>
      <height>27</height>
+=======
+     <x>480</x>
+     <y>540</y>
+     <width>99</width>
+     <height>40</height>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     </rect>
    </property>
    <property name="text">
@@ -65,9 +90,15 @@
   <widget class="QPushButton" name="btn_modificarRegistro">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>50</x>
      <y>66</y>
      <width>461</width>
+=======
+     <x>10</x>
+     <y>66</y>
+     <width>570</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <height>41</height>
     </rect>
    </property>
@@ -78,9 +109,15 @@
   <widget class="QPushButton" name="btn_eliminarRegistro">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>50</x>
      <y>116</y>
      <width>461</width>
+=======
+     <x>10</x>
+     <y>116</y>
+     <width>570</width>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <height>41</height>
     </rect>
    </property>
@@ -88,17 +125,41 @@
     <string>Eliminar Registro</string>
    </property>
   </widget>
+<<<<<<< HEAD
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
      <x>160</x>
+=======
+  <widget class="QPushButton" name="btn_operacionesCampos">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
      <y>540</y>
      <width>171</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
+<<<<<<< HEAD
     <string>Operaciones de campos</string>
+=======
+    <string>Operaciones De Campos</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_cruzar">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>540</y>
+     <width>140</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cruzar Archivo</string>
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
    </property>
   </widget>
  </widget>

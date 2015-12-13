@@ -22,7 +22,13 @@ SOURCES += main.cpp\
     agregarregistro.cpp \
     modificarregistro.cpp \
     specialstack.cpp \
+<<<<<<< HEAD
     eliminarregistro.cpp
+=======
+    eliminarregistro.cpp \
+    cruzar.cpp \
+    listaordenada.cpp
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 
 HEADERS  += mainwindow.h \
     dnuevo.h \
@@ -33,7 +39,13 @@ HEADERS  += mainwindow.h \
     agregarregistro.h \
     modificarregistro.h \
     specialstack.h \
+<<<<<<< HEAD
     eliminarregistro.h
+=======
+    eliminarregistro.h \
+    cruzar.h \
+    listaordenada.h
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 
 FORMS    += mainwindow.ui \
     dnuevo.ui \
@@ -41,4 +53,9 @@ FORMS    += mainwindow.ui \
     operacionescampos.ui \
     agregarregistro.ui \
     modificarregistro.ui \
+<<<<<<< HEAD
     eliminarregistro.ui
+=======
+    eliminarregistro.ui \
+    cruzar.ui
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8

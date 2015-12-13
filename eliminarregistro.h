@@ -29,6 +29,10 @@ public:
     string toStringArchivoD1RD(int);
     vector<Registro> actualizarRegistros();
     void hacerTabla();
+<<<<<<< HEAD
+=======
+    SpecialStack actualizarAvaillist();
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 private slots:
     void on_btn_visualizar_clicked();
 
@@ -43,3 +47,7 @@ private:
 };
 
 #endif // ELIMINARREGISTRO_H
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8

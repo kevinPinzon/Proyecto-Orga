@@ -24,7 +24,10 @@ public:
     ~Dver();
     void leerHeader();
     char str[80];
+<<<<<<< HEAD
     Campo field;
+=======
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     int cantDeCampos;
     vector <Campo> estructura;
     vector <Registro> VRegistros;
@@ -56,6 +59,13 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+<<<<<<< HEAD
+=======
+    void on_btn_cruzar_clicked();
+
+    void on_btn_operacionesCampos_clicked();
+
+>>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 private:
     Ui::Dver *ui;
 };
