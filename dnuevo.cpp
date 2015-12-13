@@ -28,13 +28,13 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
     string nombreCampo=ui->txt_nameCampo->text().toStdString();
     int tipoCampo=-1;//1-entero 2-char  3-decimal   4-ID
     if(ui->rb_int->isChecked())//ENTERO
-        tipoCampo=1;
+        tipoCampo=0;
     if(ui->rb_char->isChecked())//CHAR
-        tipoCampo=2;
+        tipoCampo=1;
     if (ui->rb_decimal->isChecked())//DECIMAL
-        tipoCampo=3;
+        tipoCampo=2;
     if (ui->rb_ID->isChecked())//ID
-        tipoCampo=4;
+        tipoCampo=3;
 
     int longitudCampo=ui->sp_longitud->value();
     int decimal=ui->sp_decimales->value();
@@ -46,11 +46,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         llave=2;
     //VALIDACIONES
     if(nombreCampo.empty()){
-<<<<<<< HEAD
-        QMessageBox::information(this,"Error","Es necesario que escriba un nombre para el campo");
-=======
         QMessageBox::warning(this,"Error","Es necesario que escriba un nombre para el campo");
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     }else{
 
         if(estructura.empty())
@@ -68,11 +64,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
             if(llavePrimariaDisponible)
                 primeraValidacion=true;
             if(!llavePrimariaDisponible){
-<<<<<<< HEAD
-                QMessageBox::information(this,"Error"," Ya existe un campo que es llave primaria");
-=======
                 QMessageBox::warning(this,"Error"," Ya existe un campo que es llave primaria");
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 
             }
             if(primeraValidacion)
@@ -95,11 +87,7 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
         }else{
             stringstream ss;
             ss<<"   Ya existe un campo con el nombre: "<<nombreCampo;
-<<<<<<< HEAD
-            QMessageBox::information(this,"Error",ss.str().c_str());
-=======
             QMessageBox::warning(this,"Error",ss.str().c_str());
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
         }
 
         ui->txt_nameCampo->setText(NULL);
@@ -108,34 +96,19 @@ void Dnuevo::on_btn_agregarCampo_clicked(){
 }
 
 void Dnuevo::on_btn_nuevoArchivo_clicked(){
-<<<<<<< HEAD
-=======
     availlist.push(-1);
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     string nombreArchivo=ui->txt_nameArchivo->text().toStdString();
     stringstream nameA;
     nameA<<nombreArchivo<<".dat";
     ofstream archivo;
     Campo field;
     if(nombreArchivo.empty()){
-<<<<<<< HEAD
-        QMessageBox::information(this,"Error","Es necesario que escriba un nombre para el archivo");
-=======
         QMessageBox::warning(this,"Error","Es necesario que escriba un nombre para el archivo");
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     }else{
         if(!estructura.empty()){
             if(!llavePrimariaDisponible){
                 archivo.open(nameA.str().c_str(), ios::in | ios::out | ios::trunc);
                 cantidadCampos=estructura.size();
-<<<<<<< HEAD
-                archivo<<cantidadCampos;
-                archivo<<",";
-                for (int i = 0; i < estructura.size(); ++i){
-                        field = estructura.at(i);
-                       // cout << field.toString() << endl;
-                        archivo << field;
-=======
                 cout<<"antes de escribir cantidad de campos"<<endl;
                 if(cantidadCampos<10){
                     archivo << "00"<<cantidadCampos << ',' << availlist.headAvaillistArchivo(availlist.peek()) << ';';
@@ -143,21 +116,14 @@ void Dnuevo::on_btn_nuevoArchivo_clicked(){
                     archivo << "0"<<cantidadCampos << ',' << availlist.headAvaillistArchivo(availlist.peek()) << ';';
                 }for (int i = 0; i < estructura.size(); ++i){
                         archivo << estructura.at(i);
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
                     }
                 llavePrimariaDisponible=true;
                 archivo.close();
                 this->close();
             }else
-<<<<<<< HEAD
-            QMessageBox::information(this,"Error","Necesita crear un campo que sea llave primaria");
-        }else{
-            QMessageBox::information(this,"Error","Necesita crear al menos un campo");
-=======
             QMessageBox::warning(this,"Error","Necesita crear un campo que sea llave primaria");
         }else{
             QMessageBox::warning(this,"Error","Necesita crear al menos un campo");
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
         }
 
 
@@ -167,23 +133,28 @@ void Dnuevo::on_btn_nuevoArchivo_clicked(){
 void Dnuevo::on_rb_int_clicked(){
     ui->sp_decimales->setEnabled(false);
     ui->sp_longitud->setEnabled(false);
-
+    ui->rb_primaria->setEnabled(false);
 }
 
 void Dnuevo::on_rb_char_clicked(){
     ui->sp_decimales->setEnabled(false);
     ui->sp_longitud->setEnabled(true);
-
+    ui->rb_primaria->setEnabled(false);
 }
 
 void Dnuevo::on_rb_decimal_clicked(){
     ui->sp_decimales->setEnabled(true);
     ui->sp_longitud->setEnabled(false);
-
+    ui->rb_primaria->setEnabled(false);
 }
 
 
 void Dnuevo::on_rb_ID_clicked(){
     ui->sp_decimales->setEnabled(false);
     ui->sp_longitud->setEnabled(false);
+    ui->rb_primaria->setEnabled(true);
+}
+
+void Dnuevo::on_pushButton_clicked(){
+    this->close();
 }

@@ -2,27 +2,11 @@
 #include "ui_agregarregistro.h"
 #include <QFile>
 #include <QTextStream>
-<<<<<<< HEAD
-=======
 #include<QItemSelection>
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 #include <QTableWidget>
 #include <QInputDialog>
 #include <QDebug>
 #include<QStandardItemModel>
-<<<<<<< HEAD
-
-#include "campo.h"
-#include"registro.h"
-
-AgregarRegistro::AgregarRegistro(QString path,vector<Campo> estructura,QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::AgregarRegistro)
-{
-    ui->setupUi(this);
-    this->path=path;
-    this->estructura=estructura;
-=======
 #include <QMessageBox>
 #include <stdlib.h>
 #include "campo.h"
@@ -36,7 +20,6 @@ AgregarRegistro::AgregarRegistro(SpecialStack availlist,QString path,vector<Camp
     fileESCRIBIR.open(this->path.toStdString().c_str(), ios::in | ios::out);
     this->estructura=estructura;
     this->VRegistros=VRegistros;
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     hacerTabla();
 }
 
@@ -63,13 +46,8 @@ void AgregarRegistro::hacerTabla(){
 
 }
 
-<<<<<<< HEAD
-Registro AgregarRegistro::actualizarTabla(){
-    return registro;
-=======
 vector<Registro> AgregarRegistro::actualizarRegistro(){
     return VRegistros;
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 }
 
 AgregarRegistro::~AgregarRegistro()
@@ -79,25 +57,7 @@ AgregarRegistro::~AgregarRegistro()
 
 void AgregarRegistro::on_btn_agregarRegi_clicked(){
     QTableWidgetItem *itemTemp;
-<<<<<<< HEAD
-    for(int j=0; j<ui->tw_registroAdd->columnCount(); j++){
-        itemTemp = ui->tw_registroAdd->item(ui->tw_registroAdd->rowCount()-1,j);
-        registro.agregarDato(itemTemp->text().toStdString());
-    }
-    if (fileESCRIBIR.is_open()){
-            registro.Escribir(fileESCRIBIR, estructura);
-            actualizarTabla();
-        }
-    else{
-        fileESCRIBIR.open(path.toStdString().c_str(), ios::in | ios::out | ios::app);
-        if (fileESCRIBIR.is_open()){
-                registro.Escribir(fileESCRIBIR, estructura);
-                actualizarTabla();
-            }
-    }
-    seAgrego=true;
-    this->close();
-=======
+    bool DatosCorrectos=true;
     //VALIDACIONES
     //para mejorar la validacion de llaves, se necesita indices.
 
@@ -112,74 +72,99 @@ void AgregarRegistro::on_btn_agregarRegi_clicked(){
         registro.clear();
         itemTemp = ui->tw_registroAdd->item(ui->tw_registroAdd->rowCount()-1,posLLave);
         bool llaveDisponible=true;
-        int llaveNueva= atoi(itemTemp->text().toStdString().c_str());
-        double llaveVal=0.00;
-        int llaveRegistrada=0;
-        for(int j=0; j<VRegistros.size(); j++){
-            llaveRegistrada=atoi(VRegistros.at(j).getDatos().at(posLLave).c_str());
-            llaveVal=(llaveRegistrada/llaveNueva);
-            if(llaveVal==1.00)
-                llaveDisponible=false;
-        }
-        if(llaveDisponible){
-            for(int j=0; j<ui->tw_registroAdd->columnCount(); j++){
-                    itemTemp = ui->tw_registroAdd->item(ui->tw_registroAdd->rowCount()-1,j);
-                    registro.agregarDato(itemTemp->text().toStdString());
-                    seAgrego=true;
-
+        string valTipoDato=itemTemp->text().toStdString().c_str();
+        if(valTipoDato[0]!='0'&&valTipoDato[0]!='1'&&valTipoDato[0]!='2'&&valTipoDato[0]!='3'&&valTipoDato[0]!='4'
+            &&valTipoDato[0]!='5'&&valTipoDato[0]!='6'&&valTipoDato[0]!='7'&&valTipoDato[0]!='8'&&valTipoDato[0]!='9'){
+            QMessageBox::critical(this,"No se ingreso el registro","     Necesita digitar un entero en el campo llave de Registro    ");
+            itemTemp->setText(NULL);
+        }else{
+            int llaveNueva= atoi(itemTemp->text().toStdString().c_str());
+            double llaveVal=0.00;
+            int llaveRegistrada=0;
+            for(int j=0; j<VRegistros.size(); j++){
+                llaveRegistrada=atoi(VRegistros.at(j).getDatos().at(posLLave).c_str());
+                llaveVal=(llaveRegistrada/llaveNueva);
+                if(llaveVal==1.00)
+                    llaveDisponible=false;
             }
-            //AVAILLIST
-            cout<<"Registro toString en agregar: "<<registro.toString()<<endl;
-            cout<<"Registro toStringArchivo en agregar: "<<registro.toStringArchivo(estructura)<<endl;
-            bool cambiarHeaderAvail=false;
-            if(availlist.peek()== -1 ){//si el availlist devuelve -1, se agrega alfinal y listo
-                cout<<"availlist tiene -1"<<endl;
-                fileESCRIBIR.seekp(availlist.getOffsetRegistro()+
-                                   (availlist.getSizeRegistro()*(VRegistros.size())));
-                VRegistros.push_back(registro);
-            }else{//si el availist devuelve distinto a -1
-                cout<<"availlist tiene distinto a -1"<<endl;
-                cout << "La posicion que sale peek del availlist: "<<availlist.peek()<<endl;
-                int sigPosDisponibleArchivo=availlist.peek();
-                int posAntes = availlist.buscarVIP(sigPosDisponibleArchivo)-1;
-                int posVector = sigPosDisponibleArchivo - posAntes;
-                availlist.pop();
-                cout << "La posicion con la que se trabaja del availlist: "<<sigPosDisponibleArchivo<<endl;
-                fileESCRIBIR.seekp(availlist.getOffsetRegistro()+sigPosDisponibleArchivo*availlist.getSizeRegistro());
-                cambiarHeaderAvail=true;
-
-                if(posVector <= 0){
-                    VRegistros.insert(VRegistros.begin()+0,registro);
-                }else{
-                    if(posVector >= VRegistros.size()){
-                        VRegistros.push_back(registro);
+            if(llaveDisponible){
+                for(int j=0; j<ui->tw_registroAdd->columnCount(); j++){
+                    itemTemp = ui->tw_registroAdd->item(ui->tw_registroAdd->rowCount()-1,j);
+                    int datoEsperado=estructura.at(j).getFieldtype();
+                    string datoResivido=itemTemp->text().toStdString();
+                    bool continuar;
+                    continuar=validacionDatos(datoEsperado,datoResivido);
+                    if(continuar){
+                        registro.agregarDato(itemTemp->text().toStdString());
+                        seAgrego=true;
                     }else{
-                        VRegistros.insert(VRegistros.begin()+posVector,registro);
+                     QMessageBox::critical(this,"No se ingreso el registro","     datos incorrectos     ");
+                     itemTemp->setText(NULL);
+                     DatosCorrectos=false;
                     }
                 }
-            }
-            if (fileESCRIBIR.is_open()){
-                cout<<"apunto de escribir"<<endl;
-                registro.Escribir(fileESCRIBIR, estructura);
-                actualizarRegistro();
-                registro.clear();
-                if(cambiarHeaderAvail){
-                    fileESCRIBIR.seekp(4);
-                    fileESCRIBIR<< availlist.headAvaillistArchivo(availlist.peek());
-                    QMessageBox::information(this," BRILLANTE   "," Se agrego el registro    ");
-                    this->close();
-                }else{
-                QMessageBox::information(this," BRILLANTE   "," Se agrego el registro    ");
-                this->close();
+                if(DatosCorrectos){
+                //AVAILLIST
+                    cout<<"Registro toString en agregar: "<<registro.toString()<<endl;
+                    cout<<"Registro toStringArchivo en agregar: "<<registro.toStringArchivo(estructura)<<endl;
+                    bool cambiarHeaderAvail=false;
+                    if(availlist.peek()== -1 || availlist.peek()== 0000-1){//si el availlist devuelve -1, se agrega alfinal y listo
+                        cout<<"availlist tiene -1"<<endl;
+                        fileESCRIBIR.clear();
+                        fileESCRIBIR.seekp(0, ios::beg);//setea el offset al comienzo del archivo)
+                        fileESCRIBIR.seekp(availlist.getOffsetRegistro()+
+                                           (availlist.getSizeRegistro()*(VRegistros.size())));
+                        VRegistros.push_back(registro);
+                    }else{//si el availist devuelve distinto a -1
+                        cout<<"availlist tiene distinto a -1"<<endl;
+                        cout << "La posicion que sale peek del availlist: "<<availlist.peek()<<endl;
+                        int sigPosDisponibleArchivo=availlist.peek();
+                        int posAntes = availlist.buscarVIP(sigPosDisponibleArchivo)-1;
+                        int posVector = sigPosDisponibleArchivo - posAntes;
+                        availlist.pop();
+                        cout << "La posicion con la que se trabaja del availlist: "<<sigPosDisponibleArchivo<<endl;
+                        fileESCRIBIR.clear();
+                        fileESCRIBIR.seekp(0, ios::beg);//setea el offset al comienzo del archivo)
+                        fileESCRIBIR.seekp(availlist.getOffsetRegistro()+sigPosDisponibleArchivo*availlist.getSizeRegistro());
+                        cambiarHeaderAvail=true;
+
+                        if(posVector <= 0)
+                            VRegistros.insert(VRegistros.begin()+0,registro);
+                        else{
+                            if(posVector >= VRegistros.size())
+                                VRegistros.push_back(registro);
+                            else
+                                VRegistros.insert(VRegistros.begin()+posVector,registro);
+                        }
+                    }
+                    if (fileESCRIBIR.is_open()){
+                        cout<<"apunto de escribir"<<endl;
+                        registro.Escribir(fileESCRIBIR, estructura);
+                        fileESCRIBIR.seekp(4);
+                        fileESCRIBIR<< availlist.headAvaillistArchivo(availlist.peek());
+                        actualizarRegistro();
+                        registro.clear();
+                        QMessageBox::information(this," BRILLANTE   "," Se agrego el registro    ");
+                        this->close();
+                        /*if(cambiarHeaderAvail){
+                            fileESCRIBIR.seekp(4);
+                            fileESCRIBIR<< availlist.headAvaillistArchivo(availlist.peek());
+                            QMessageBox::information(this," BRILLANTE   "," Se agrego el registro, dentro de cambiar header avail    ");
+                            this->close();
+                        }else{
+                        QMessageBox::information(this," BRILLANTE   "," Se agrego el registro, no se cambio header avail    ");
+                        this->close();
+                        }*/
+                        fileESCRIBIR.close();
+                    }else
+                        QMessageBox::critical(this,"ERROR","     No se pudo abrir el archivo para escritura en agregarRegistro    ");
                 }
-            }else
-                QMessageBox::critical(this,"ERROR","     No se pudo abrir el archivo para escritura en agregarRegistro    ");
-        }else{
-        QMessageBox::critical(this,"No se ingreso el registro","     La llave que desea ingresar ya esta siendo utilizada por otro registro    ");
-        itemTemp->setText(NULL);
+            }else{
+            QMessageBox::critical(this,"No se ingreso el registro","     La llave que desea ingresar ya esta siendo utilizada por otro registro    ");
+            itemTemp->setText(NULL);
+            }
         }
     }
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
 }
 
 
@@ -188,4 +173,25 @@ void AgregarRegistro::on_btn_cerrar_clicked(){
         fileESCRIBIR.close();
     seAgrego=false;
     this->close();
+}
+
+SpecialStack AgregarRegistro::actualizarAvail(){
+    return availlist;
+}
+
+bool AgregarRegistro::validacionDatos(int esperado,string recivido){
+    if(esperado==0 || esperado==2|| esperado==3){
+        if(recivido[0]!='0'&&recivido[0]!='1'&&recivido[0]!='2'&&recivido[0]!='3'&&recivido[0]!='4'
+                &&recivido[0]!='5'&&recivido[0]!='6'&&recivido[0]!='7'&&recivido[0]!='8'&&recivido[0]!='9'){
+            return false;
+        }else
+            return true;
+    }
+    if(esperado==1){
+            if(!(recivido[0]!='0'&&recivido[0]!='1'&&recivido[0]!='2'&&recivido[0]!='3'&&recivido[0]!='4'
+                    &&recivido[0]!='5'&&recivido[0]!='6'&&recivido[0]!='7'&&recivido[0]!='8'&&recivido[0]!='9'&&recivido[0]!='*')){
+                return false;
+        }else
+                return true;
+    }
 }

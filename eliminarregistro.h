@@ -24,7 +24,7 @@ public:
     QString path;
     SpecialStack availlist;
     ofstream fileESCRIBIR;//para marcar el registro y escribir el ultimo rrn
-    ifstream fileLEER;//para escribir en el header el rrn del registro borrado
+    //ifstream fileLEER;//para escribir en el header el rrn del registro borrado
     int RRNaBorrar;
     string toStringArchivoD1RD(int);
     vector<Registro> actualizarRegistros();

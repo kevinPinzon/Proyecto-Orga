@@ -17,16 +17,15 @@ class Campo{
     int keytype;//0- nada 1- llave primiaria 2- llave secundaria
 
 public:
-
     Campo();
-    Campo(const char* name, int fieldtype, int size, int sizedecimal, int keytype);
-
+    Campo(const char*, int, int, int, int);
     string toString()const;
     string inttoString(int, bool) const;
     string toStringArchivo() const;
     friend istream& operator>>(istream&, Campo&);
     friend ofstream& operator << (ofstream&, const Campo&);
     friend ifstream& operator >> (ifstream&, Campo&);
+
     void setFieldtype(int);
     int getFieldtype()const;
     void setName(const char*);
@@ -38,9 +37,6 @@ public:
     void setKeytype(int);
     int getKeytype()const;
 
-    //friend ifstream& operator >> (ifstream&, Persona&)
     //podriamos poner gets y sets para cambiar cosas acerca de los campos
-
 };
-
 #endif // CAMPO_H

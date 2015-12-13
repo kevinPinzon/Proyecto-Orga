@@ -24,14 +24,14 @@ Campo::Campo (const char* name, int fieldtype, int size, int sizedecimal, int ke
 }
 
 string Campo::toString()const{
-    stringstream ss;
-    ss << "Name: " << name << "\tfieldtype: " << fieldtype << "\tsize: " << size << "\tsizedecimal: " << sizedecimal << "\tkeytype: " << keytype;
-    return ss.str();
+        stringstream ss;
+        ss << "Name: " << name << "\tfieldtype: " << fieldtype << "\tsize: " << size << "\tsizedecimal: " << sizedecimal << "\tkeytype: " << keytype;
+        return ss.str();
 }
 
 string Campo::inttoString(int num, bool edilson) const{
     stringstream ss;
-    if (edilson){
+    if (edilson){//edilson es true todo lo que no sea ID
         if(num < 10){
             ss << "00" << num;
         } else if (num <100){
@@ -39,7 +39,7 @@ string Campo::inttoString(int num, bool edilson) const{
         } else {
             ss<<num;
         }
-    } else {//para ID
+    } else {//edilson es false y para ID
         if(num < 10){
             ss << "00000" << num;
         } else if (num <100){
@@ -72,20 +72,25 @@ string Campo::toStringArchivo() const{
     }
     ss << ",";
 
-    ss << inttoString(fieldtype, false) << ",";
-    ss << inttoString(size, false) << ",";
-    ss << inttoString(sizedecimal, false) << ",";
-    ss << inttoString(keytype, false) << "\t";
+    ss << inttoString(fieldtype, true) << ",";
+    ss << inttoString(size, true) << ",";
+    ss << inttoString(sizedecimal, true) << ",";
+    ss << inttoString(keytype, true) << "\t";
 
     return ss.str();
 }
 
 istream& operator>>(istream& input, Campo& campo){
     input.ignore();
+    cout << "char: Nombre de campo" << endl;
     input.getline(campo.name, 30);
+    cout << "int: fieldtype donde 0- entero 1- texto 2- decimal 3- ID" << endl;
     input >> campo.fieldtype;
+    cout << "int: size para longitud de cadena de texto" << endl;
     input >> campo.size;
+    cout << "int: size para digitos decimales" << endl;
     input >> campo.sizedecimal;
+    cout << "int: tipo de llave 0- nada 1- primaria 2- secundaria" << endl;
     input >> campo.keytype;
     return input;
 }
@@ -102,38 +107,34 @@ ifstream& operator >> (ifstream& input, Campo& campo){
     char str[100];
     if (!input.getline(str, 100, '\t'))
         return input;
+    //cout << str << endl;
     linea = str;
 
     int pos1=0, pos2;
     pos2 = linea.find('-');
     sublinea = linea.substr(pos1, pos2-pos1);
-    campo.setName(sublinea.c_str());
-    //strcpy(campo.name, sublinea.c_str());
+    strcpy(campo.name, sublinea.c_str());
 
     pos1 = linea.find(',');
     pos2 = linea.find(',', pos1+1);
     pos1++;
     sublinea = linea.substr(pos1, pos2-pos1);
-    campo.setFieldtype(atoi(sublinea.c_str()));
-    //campo.fieldtype = atoi(sublinea.c_str());
+    campo.fieldtype = atoi(sublinea.c_str());
 
     pos1 = pos2+1;
     pos2 = linea.find(',', pos1);
     sublinea = linea.substr(pos1, pos2-pos1);
-    campo.setSize(atoi(sublinea.c_str()));
-    //campo.size = atoi(sublinea.c_str());
+    campo.size = atoi(sublinea.c_str());
 
     pos1 = pos2+1;
     pos2 = linea.find(',', pos1);
     sublinea = linea.substr(pos1, pos2-pos1);
-    campo.setSizedecimal(atoi(sublinea.c_str()));
-    //campo.sizedecimal = atoi(sublinea.c_str());
+    campo.sizedecimal = atoi(sublinea.c_str());
 
     pos1 = pos2+1;
     pos2 = linea.find(',', pos1);
     sublinea = linea.substr(pos1, pos2-pos1);
-    campo.setKeytype(atoi(sublinea.c_str()));
-    //campo.keytype = atoi(sublinea.c_str());
+    campo.keytype = atoi(sublinea.c_str());
 
     return input;
 }

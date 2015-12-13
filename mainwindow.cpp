@@ -40,3 +40,8 @@ void MainWindow::on_pushButton_2_clicked(){
     }
 
 }
+
+void MainWindow::on_btn_salir_clicked(){
+    this->close();
+
+}

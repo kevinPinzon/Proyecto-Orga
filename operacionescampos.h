@@ -19,19 +19,14 @@ public:
     explicit OperacionesCampos(QString,vector <Campo>,QWidget *parent = 0);
     ~OperacionesCampos();
     vector <Campo> estructura;
-<<<<<<< HEAD
-    QString path;
-    void llenarComboBoxCampos();
-    ofstream archivo;
-    int index=0;
-=======
     Campo field;
     QString path;
     void llenarComboBoxCampos();
-    ofstream archivo;
+    ofstream fileEscribir;
     int index=-1;
->>>>>>> 5fd0c51c169a14e15dc98375627feb975be184c8
     bool llavePrimariaDisponible=false;
+    vector<Campo> actualizarEstructura();
+
 private slots:
     void on_btn_modificarCampo_clicked();
 

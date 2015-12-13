@@ -24,7 +24,7 @@ eliminarRegistro::eliminarRegistro(SpecialStack availlist,vector<Campo> estructu
     this->VRegistros=VRegistros;
     this->path=path;
     fileESCRIBIR.open(path.toStdString().c_str(), ios::in | ios::out);
-    ui->sp_elimRecord->setMinimum(0);
+    ui->sp_elimRecord->setMinimum(1);
     ui->sp_elimRecord->setMaximum(VRegistros.size());
     hacerTabla();
 }
@@ -67,25 +67,28 @@ string eliminarRegistro::toStringArchivoD1RD(int posicion){//devuelve la cadena 
 }
 
 void eliminarRegistro::on_btn_borrarRecord_clicked(){
-    int sigPosDisp = availlist.peek();
-    string alBorrado = toStringArchivoD1RD(sigPosDisp);
-    int posArchivo = availlist.posicionArchivo(RRNaBorrar);
+    if (!(RRNaBorrar < 0 || RRNaBorrar >= VRegistros.size())){	//validado que la pos 1 - registros.zise()
+        int sigPosDisp = availlist.peek();
+        string alBorrado = toStringArchivoD1RD(sigPosDisp);
+        int posArchivo = availlist.posicionArchivo(RRNaBorrar);
 
-    if (fileESCRIBIR.is_open()){
-        fileESCRIBIR.clear();
-        fileESCRIBIR.seekp(availlist.getOffsetRegistro()+(availlist.getSizeRegistro()*(posArchivo)));
-        fileESCRIBIR<<alBorrado;
-        cout<<"availlist peek primero es: "<<availlist.peek()<<endl;
-        availlist.push(posArchivo);
-        cout<<"availlist peek ahora es: "<<availlist.peek()<<endl;
-        cout<<"rrnaBorrar es: "<<RRNaBorrar<<endl;
-        fileESCRIBIR.seekp(4);
-        cout<<"headavaillistarchivo, va a mandar a fileEscribir: "<<availlist.headAvaillistArchivo(posArchivo)<<endl;
-        fileESCRIBIR << availlist.headAvaillistArchivo(posArchivo);
-        VRegistros.erase(VRegistros.begin()+RRNaBorrar);//borra el registro del vector en memoria
+        if (fileESCRIBIR.is_open()){
+            fileESCRIBIR.clear();
+            fileESCRIBIR.seekp(availlist.getOffsetRegistro()+(availlist.getSizeRegistro()*(posArchivo)));
+            fileESCRIBIR<<alBorrado;
+            cout<<"availlist peek primero es: "<<availlist.peek()<<endl;
+            availlist.push(posArchivo);
+            cout<<"availlist peek ahora es: "<<availlist.peek()<<endl;
+            cout<<"rrnaBorrar es: "<<RRNaBorrar<<endl;
+            fileESCRIBIR.seekp(4);
+            cout<<"headavaillistarchivo, va a mandar a fileEscribir: "<<availlist.headAvaillistArchivo(posArchivo)<<endl;
+            fileESCRIBIR << availlist.headAvaillistArchivo(posArchivo);
+            VRegistros.erase(VRegistros.begin()+RRNaBorrar);//borra el registro del vector en memoria
+        }else
+            QMessageBox::warning(this,"ERROR","       No se ha podido abrir el archivo para escritura en borrarRegistro  ");
+        this->close();
     }else
-        QMessageBox::warning(this,"ERROR","       No se ha podido abrir el archivo para escritura en borrarRegistro  ");
-    this->close();
+        QMessageBox::critical(this,"ERROR","    La posicionque ha ingresado es invalida ");
 }
 
 void eliminarRegistro::hacerTabla(){
